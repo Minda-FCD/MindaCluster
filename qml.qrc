@@ -20,11 +20,9 @@
         <file>image/Engine_start_stop_active.png</file>
         <file>image/Engine_start_stop_inactive.png</file>
         <file>image/fuel_gauge.png</file>
-        <file>image/fuelneedle.png</file>
         <file>image/High_Beam_Indicator.png</file>
         <file>image/navigation_next_item.png</file>
         <file>image/navigation_previous_item.png</file>
-        <file>image/needle.png</file>
         <file>image/oilIndicator.png</file>
         <file>image/overlay_active.png</file>
         <file>image/overlay_active1.png</file>
@@ -55,5 +53,58 @@
         <file>image/brown.jpg</file>
         <file>image/hay.jpg</file>
         <file>image/skyblue.jpg</file>
+        <file>DialDelegate.qml</file>
+        <file>DialView.qml</file>
+        <file>RPM_DialView.qml</file>
+        <file>Speed_DialView.qml</file>
+        <file>image/ABS.png</file>
+        <file>image/Batt col.png</file>
+        <file>image/cabin_lock.png</file>
+        <file>image/dc_dc_fail.png</file>
+        <file>image/engine_check.png</file>
+        <file>image/exhaust.png</file>
+        <file>image/filter.png</file>
+        <file>image/glow_plug.png</file>
+        <file>image/Highbeam.png</file>
+        <file>image/immobilizer.png</file>
+        <file>image/logo.png</file>
+        <file>image/low_aux_air.png</file>
+        <file>image/low_oil.png</file>
+        <file>image/MIL.png</file>
+        <file>image/MIS 1.png</file>
+        <file>image/MIS 2.png</file>
+        <file>image/MIS 3.png</file>
+        <file>image/MIS 4.png</file>
+        <file>image/MIS 5.png</file>
+        <file>image/Music icon.png</file>
+        <file>image/neutral.png</file>
+        <file>image/Oil.png</file>
+        <file>image/PARKING.png</file>
+        <file>image/Pointer1.png</file>
+        <file>image/Pointer2.png</file>
+        <file>image/Pointer3.png</file>
+        <file>image/Pointer4.png</file>
+        <file>image/Pointer5.png</file>
+        <file>image/Pointer6.png</file>
+        <file>image/rear_fog.png</file>
+        <file>image/RPM_01.png</file>
+        <file>image/setbelt col.png</file>
+        <file>image/Skin_1.png</file>
+        <file>image/Skin_2.png</file>
+        <file>image/Skin_3.png</file>
+        <file>image/Skin_4.png</file>
+        <file>image/Skin_5.png</file>
+        <file>image/Skin_6.png</file>
+        <file>image/Skin_7.png</file>
+        <file>image/Skin_8.png</file>
+        <file>image/Skin_9.png</file>
+        <file>image/Skin_10.png</file>
+        <file>image/Speedo_01.png</file>
+        <file>image/stop_engine.png</file>
+        <file>image/Temp_Col.png</file>
+        <file>image/trans_1.png</file>
+        <file>image/TRANS 2.png</file>
+        <file>image/TRANS TEMP.png</file>
+        <file>image/water_in_fuel.png</file>
     </qresource>
 </RCC>

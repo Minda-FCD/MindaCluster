@@ -2,17 +2,17 @@
 import QtQuick 2.1
 
 Item {
-    id: container1
-    width: ListView.view.width; height: 60; anchors.leftMargin: 10; anchors.rightMargin: 10
+   /* id: container1
+    width: 180; height: 40; anchors.leftMargin: 10; anchors.rightMargin: 10
     property bool raiseFlag
     Rectangle {
         id: content
-        anchors.centerIn: parent; width: container1.width - 40; height: container1.height - 10
+        anchors.centerIn: parent; width: container1.width ; height: container1.height - 10
         color: "transparent"
-        antialiasing: true
+        //antialiasing: true
         radius: 10
 
-        Rectangle { anchors.fill: parent; anchors.margins: 3; color: "#1ae7ee"; antialiasing: true; radius: 8 }
+        Rectangle { anchors.fill: parent; anchors.margins: 3; color: "#1ae7ee";  radius: 8 } //antialiasing: true;
     }
 
     Text {
@@ -24,7 +24,7 @@ Item {
     }
 
 
-    Keys.onSpacePressed: {
+   Keys.onSpacePressed: {
         switch(index){
         case 0:
             viewPointeroption.focus=true
@@ -33,6 +33,9 @@ Item {
             viewBackgroundoption.focus=true
             break;
         case 2:
+            viewDialoption.focus=true
+            break;
+        case 3:
             break;
         }
 
@@ -40,11 +43,11 @@ Item {
 
     states: State {
         name: "active"; when: container1.activeFocus
-        PropertyChanges { target: content; color: "#FCFFF5"; scale: 1.1 }
-        PropertyChanges { target: label; font.pixelSize: 16 }
+        PropertyChanges { target: content; color: "white"; scale: 1.1 }//"#FCFFF5"
+        PropertyChanges { target: label; font.pixelSize: 20 }
     }
 
     transitions: Transition {
         NumberAnimation { properties: "scale"; duration: 100 }
-    }
+    }*/
 }

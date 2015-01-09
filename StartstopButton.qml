@@ -9,8 +9,9 @@ FocusScope {
         id: flipable
         width: 50
         height: 64
-        x: 600
+        x: 610
         y: 300
+        scale:0.6
 
         front: Image { source: "image/Engine_start_stop_inactive.png"; anchors.centerIn: parent }
         back: Image { source: "image/Engine_start_stop_active.png"; anchors.centerIn: parent }
@@ -30,8 +31,6 @@ FocusScope {
         transitions: Transition {
             NumberAnimation { target: rotation; property: "angle"; duration: 100 }
         }
-
-
 
 
     }

@@ -20,11 +20,22 @@ FocusScope {
         id:pointerOption
 
         ListElement{
-            source:"image/needle.png"
+            source:"image/Pointer1.png"
         }
-
         ListElement{
-            source:"image/fuelneedle.png"
+            source:"image/Pointer2.png"
+        }
+        ListElement{
+            source:"image/Pointer3.png"
+        }
+        ListElement{
+            source:"image/Pointer4.png"
+        }
+        ListElement{
+            source:"image/Pointer5.png"
+        }
+        ListElement{
+            source:"image/Pointer6.png"
         }
 
 

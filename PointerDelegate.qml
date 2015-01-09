@@ -6,7 +6,7 @@ Item {
 
     Rectangle {
         id: pointerRec
-        anchors.centerIn: parent; width: 100; height: 200
+        anchors.centerIn: parent; width: 80; height: 160
         color: "transparent"
         antialiasing: true
         radius: 10
@@ -22,13 +22,24 @@ Item {
     Keys.onSpacePressed: {
         switch(index){
         case 0:
-               cluster.configurablePointer="image/needle.png"
+               cluster.configurablePointer="image/Pointer1.png"
             break;
         case 1:
-                cluster.configurablePointer="image/fuelneedle.png"
+                cluster.configurablePointer="image/Pointer2.png"
             break;
-
         case 2:
+                cluster.configurablePointer="image/Pointer3.png"
+            break;
+        case 3:
+                cluster.configurablePointer="image/Pointer4.png"
+            break;
+        case 4:
+                cluster.configurablePointer="image/Pointer5.png"
+            break;
+        case 5:
+                cluster.configurablePointer="image/Pointer6.png"
+            break;
+        case 6:
 
             break;
         }
