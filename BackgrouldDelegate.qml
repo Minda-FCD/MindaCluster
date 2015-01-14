@@ -28,69 +28,88 @@ Item {
 
         case 0:
             cluster.configurableBackground="image/Skin_4.png"
+            cluster.configurableBackground_index = 1
             break;
 
         case 1:
-            cluster.configurableBackground="image/Skin_5.png"
+            cluster.configurableBackground="image/Skin_14.png"
+            cluster.configurableBackground_index = 2
             break;
 
         case 2:
-            cluster.configurableBackground="image/Skin_6.png"
+            cluster.configurableBackground="image/Skin_15.png"
+            cluster.configurableBackground_index = 3
             break;
 
         case 3:
-            cluster.configurableBackground="image/Skin_7.png"
+            cluster.configurableBackground="image/Skin_16.png"
+            cluster.configurableBackground_index = 4
             break;
 
         case 4:
-            cluster.configurableBackground="image/Skin_8.png"
+            cluster.configurableBackground="image/Skin_5.png"
+            cluster.configurableBackground_index = 5
             break;
 
         case 5:
-            cluster.configurableBackground="image/Skin_9.png"
+            cluster.configurableBackground="image/Skin_6.png"
+            cluster.configurableBackground_index = 6
             break;
 
         case 6:
-            cluster.configurableBackground="image/Skin_10.png"
+            cluster.configurableBackground="image/Skin_7.png"
+            cluster.configurableBackground_index = 7
             break;
 
         case 7:
-            cluster.configurableBackground="image/Skin_1.png"
+            cluster.configurableBackground="image/Skin_8.png"
             break;
 
         case 8:
-            cluster.configurableBackground="image/Skin_2.png"
+            cluster.configurableBackground="image/Skin_9.png"
             break;
 
         case 9:
-            cluster.configurableBackground="image/Skin_3.png"
+            cluster.configurableBackground="image/Skin_10.png"
             break;
 
         case 10:
-            cluster.configurableBackground="image/mountain_view.jpg"
+            cluster.configurableBackground="image/Skin_1.png"
             break;
 
         case 11:
-            cluster.configurableBackground="image/Red.jpg"
+            cluster.configurableBackground="image/Skin_2.png"
             break;
 
         case 12:
-            cluster.configurableBackground="image/grass.jpg"
+            cluster.configurableBackground="image/Skin_3.png"
             break;
 
         case 13:
-            cluster.configurableBackground="image/brown.jpg"
+            cluster.configurableBackground="image/mountain_view.jpg"
             break;
 
         case 14:
-            cluster.configurableBackground="image/hay.jpg"
+            cluster.configurableBackground="image/Red.jpg"
             break;
 
         case 15:
-            cluster.configurableBackground="image/skyblue.jpg"
+            cluster.configurableBackground="image/grass.jpg"
             break;
 
         case 16:
+            cluster.configurableBackground="image/brown.jpg"
+            break;
+
+        case 17:
+            cluster.configurableBackground="image/hay.jpg"
+            break;
+
+        case 18:
+            cluster.configurableBackground="image/skyblue.jpg"
+            break;
+
+        case 19:
             cluster.configurableBackground=""
             break;
 

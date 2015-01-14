@@ -31,9 +31,10 @@ ApplicationWindow {
         property bool brakeFlag: false
 
         property string configurablePointer:"image/Pointer3.png"
-        property string configurableBackground:"image/Skin_4.png"
+        property string configurableBackground:"image/Skin_14.png"
         property string configurableDial:"image/rpm_inactive.png"
         property int configurableDial_index:2
+        property int configurableBackground_index:2
 
 
         function rpmSpeedMeter(){
@@ -42,64 +43,75 @@ ApplicationWindow {
             speedoMeter.value = speedValue
 
             switch(gear)
-            {
-            case 0:
-                rpmValue = rpmValue + 5
-                speedValue = speedValue + 2
-                gear = 1
-                break
-            case 1:
-                if(rpmValue > 60)
-                {
-                    rpmValue = 30;
-                    speedValue = speedValue - 5
-                    gear = 2
-                }
-                rpmValue = rpmValue + 2.5
-                speedValue = speedValue + 1.5
-                break;
+                       {
+                       case 0:
+                           rpmValue = rpmValue + 5
+                           speedValue = speedValue + 2
+                           gear = 1
+                           bounce_gear_image.start()
+                           bounce_display_gear.start()
+                           break
+                       case 1:
+                           if(rpmValue > 60)
+                           {
+                               rpmValue = 30;
+                               speedValue = speedValue - 5
+                               gear = 2
+                               bounce_gear_image.start()
+                               bounce_display_gear.start()
+                           }
+                           rpmValue = rpmValue + 2.5
+                           speedValue = speedValue + 1.5
+                           break;
 
-            case 2:
-                if(rpmValue > 70)
-                {
-                    rpmValue = 50;
-                    speedValue = speedValue - 4
-                    gear = 3
-                }
-                rpmValue = rpmValue + 2
-                speedValue = speedValue + 1
+                       case 2:
+                           if(rpmValue > 70)
+                           {
+                               rpmValue = 50;
+                               speedValue = speedValue - 4
+                               gear = 3
+                               bounce_gear_image.start()
+                               bounce_display_gear.start()
+                           }
+                           rpmValue = rpmValue + 2
+                           speedValue = speedValue + 1
 
 
-                break;
-            case 3:
-                if(rpmValue > 80)
-                {
-                    rpmValue = 60;
-                    speedValue = speedValue - 3
-                    gear = 4
-                }
-                rpmValue = rpmValue + 1.5
-                speedValue = speedValue + 0.5
+                           break;
+                       case 3:
+                           if(rpmValue > 80)
+                           {
+                               rpmValue = 60;
+                               speedValue = speedValue - 3
+                               gear = 4
+                               bounce_gear_image.start()
+                               bounce_display_gear.start()
+                           }
+                           rpmValue = rpmValue + 1.5
+                           speedValue = speedValue + 0.8
 
-                break;
-            case 4:
-                if(rpmValue > 90)
-                {
-                    rpmValue = 70;
-                    speedValue = speedValue - 1
-                    gear = 4
-                }
-                rpmValue = rpmValue + 1
-                speedValue = speedValue + 0.3
-                break;
+                           break;
+                       case 4:
+                           if(rpmValue > 90)
+                           {
+                               rpmValue = 70;
+                               speedValue = speedValue - 1
+                               gear = 4
+                           }
+                           rpmValue = rpmValue + 1
+                           speedValue = speedValue + 1.2
+                           break;
 
-            }
-            if(speedValue >120)
-            {
-                rpmValue = speedValue = gear = 0
-            }
+                       }
+                       if(speedValue >120)
+                       {
+                           rpmValue = speedValue = gear = 0
+                           bounce_gear_image.start()
+                           bounce_display_gear.start()
+                       }
 
-        }
+                   }
+
 
 
 
@@ -317,18 +329,6 @@ ApplicationWindow {
                }
 
         Image {
-                   id: neutral
-                    x: 600
-                    y: 150
-                    z: 1
-                    scale: 0.4
-                    //opacity: 0
-                    //visible: true
-                    source: "image/neutral.png"
-        }
-
-
-        Image {
                 id: turn_left
                 x: 560
                 y: 208
@@ -486,18 +486,19 @@ ApplicationWindow {
         Text {
             id: digitalSpeed
             x: 840
-            y: 230
+            y: 280 //230
             z: 3
             color: "#cde81d"
             text: parseInt(speedoMeter.value)
             font.family: "Abyssinica SIL"
             font.italic: true
             smooth: true
-            opacity: switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;}
+            opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;}}
             style: Text.Raised
             font.pixelSize: 35
 
         }
+/*
         Text {
             id: speed_down
             x: 840
@@ -514,6 +515,7 @@ ApplicationWindow {
             visible: false
 
         }
+
         Text {
             id: speed_up
             x: 840
@@ -530,22 +532,88 @@ ApplicationWindow {
             visible: false
 
         }
-        Text {
-            id: display_gear
-            x: 620
-            y: 150
-            z: 0
-            color: "#cde81d"
-            text: parseInt(cluster.gear)
-            font.family: "Abyssinica SIL"
-            horizontalAlignment: Text.AlignHCenter
-            smooth: true
-            opacity: 0
-            style: Text.Raised
+*/
+        Image {
+            id: neutral
+             x: 598
+             y: 135
+             z: 1
+             scale: 0.4
+             //opacity: 0
+             //visible: true
+             source: "image/neutral.png"
+         }
+         Text {
+             id: display_gear
+             property int maxHeight: 120 //160 //cluster.height / 3
+             property int minHeight: 153 //320 //2 * cluster.height / 3
+             x: 620
+             y: 153
+             z: 1
+             color: "#cde81d" //"#ee0ed0"
+             text: parseInt(cluster.gear)
+             font.family: "Abyssinica SIL"
+             horizontalAlignment: Text.AlignHCenter
+             smooth: true
+             opacity: 0
+             style: Text.Raised
+             font.pixelSize: 37
 
-            font.pixelSize: 35
-        }
+             SequentialAnimation on y {
+                 id: bounce_display_gear
+                 //loops: Animation.Infinite
+                 // Move from minHeight to maxHeight in 300ms, using the OutExpo easing function
+                 NumberAnimation {
+                     from: display_gear.minHeight; to: display_gear.maxHeight
+                     easing.type: Easing.OutExpo; duration: 300
+                 }
 
+                 // Then move back to minHeight in 1 second, using the OutBounce easing function
+                 NumberAnimation {
+                     from: display_gear.maxHeight; to: display_gear.minHeight
+                     easing.type: Easing.OutBounce; duration: 1000
+                 }
+                 // Then pause for 500ms
+                 PauseAnimation { duration: 500 }
+             }
+         }
+
+         Image {
+                 id: gear_image
+                 property int maxHeight: 80 //160 //cluster.height / 3
+                 property int minHeight: 110 //320 //2 * cluster.height / 3
+
+                 //anchors.horizontalCenter: parent.horizontalCenter
+                 x: 568
+                 y: 110 //minHeight
+                 z: 0
+                 scale:0.4
+                 opacity:0
+                 source: "image/settings.png"
+                 //bounce_gear_image.start()
+                 SequentialAnimation on y {
+                     id: bounce_gear_image
+                     //loops: Animation.Infinite
+                     // Move from minHeight to maxHeight in 300ms, using the OutExpo easing function
+                     NumberAnimation {
+                         from: gear_image.minHeight; to: gear_image.maxHeight
+                         easing.type: Easing.OutExpo; duration: 300
+                     }
+
+                     // Then move back to minHeight in 1 second, using the OutBounce easing function
+                     NumberAnimation {
+                         from: gear_image.maxHeight; to: gear_image.minHeight
+                         easing.type: Easing.OutBounce; duration: 1000
+                     }
+                     // Then pause for 500ms
+                     PauseAnimation { duration: 500 }
+                 }
+                 //! [0]
+                 // Animate the y property. Setting loops to Animation.Infinite makes the
+                 // animation repeat indefinitely, otherwise it would only run once.
+
+                 //! [0]
+             }
         Text {
             id: totalDistance
             x: 563
@@ -735,7 +803,7 @@ ApplicationWindow {
                 id: speed_inactive;
                 x: -9;
                 y: 28;
-                opacity: 0.8;
+                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:0.8}
                 z: 3;
                 //scale:0.7
                 //source: "image/speed_inactive.png"
@@ -747,7 +815,11 @@ ApplicationWindow {
                    State {
                         name: "change_speed_dial2"; when: cluster.configurableDial_index == 2
                         PropertyChanges { target: speed_inactive; source:"image/speed_inactive.png"} //scale:0.7
-                    }
+                    },
+                    State {
+                         name: "change_speed_dial3"; when: cluster.configurableDial_index == 3
+                         PropertyChanges { target: speed_inactive; source:"image/original Speedo.png"} //scale:0.7
+                     }
                   ]
                /* transitions: Transition {
                     from: "change_speed_dial2"; to: "change_speed_dial1"; reversible:true
@@ -759,8 +831,8 @@ ApplicationWindow {
 
             Image {
                 id: speedOverlay
-                x: switch(cluster.configurableDial_index){case 1:135;break;case 2:124;break;}
-                y: switch(cluster.configurableDial_index){case 1:140;break;case 2:160;break;}
+                x: switch(cluster.configurableDial_index){case 1:135;break;case 2:124;break;case 3:124;break;}
+                y: switch(cluster.configurableDial_index){case 1:140;break;case 2:160;break;case 3:160;break;}
                 z: 3
                 opacity: 0
                 source: "image/overlay_active.png"
@@ -768,10 +840,10 @@ ApplicationWindow {
 
             Image  {
                 id: needle1
-                x: switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;} //129
-                y: switch(cluster.configurableDial_index){case 1:72;break;case 2:91;break;}
+                x: switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;case 3:124;break;} //129
+                y: switch(cluster.configurableDial_index){case 1:72;break;case 2:91;break;case 3:91;break;}
                 clip: true
-                opacity: 1
+                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:1}
                 z: 4
                 smooth: true
                 scale:1
@@ -784,7 +856,9 @@ ApplicationWindow {
                            {
                             case 1:(Math.min(Math.max(-115, speedoMeter.value*2.6 - 115), 185));
                                 break;
-                            case 2:(Math.min(Math.max(-130, speedoMeter.value*2.6 - 130), 133));
+                            case 2:(Math.min(Math.max(-130, speedoMeter.value*2.2 - 130), 133));
+                                break;
+                            case 3:(Math.min(Math.max(-123, speedoMeter.value*2.2 - 130), 133));
                                 break;
                            }
 /**/
@@ -818,7 +892,7 @@ ApplicationWindow {
                 id: rpm_inactive;
                 x: -30;
                 y: 20;
-                opacity: 0.8;
+                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:0.8}
 
                 z: 3;
                 //scale:0.7
@@ -830,7 +904,11 @@ ApplicationWindow {
                    State {
                         name: "change_rpm_dial2"; when: cluster.configurableDial_index == 2
                         PropertyChanges { target: rpm_inactive; source:"image/rpm_inactive.png";} //scale:0.7
-                    }
+                    },
+                    State {
+                         name: "change_rpm_dial3"; when: cluster.configurableDial_index == 3
+                         PropertyChanges { target: rpm_inactive; source:"image/Original RPM.png";} //scale:0.7
+                     }
                   ]
              /*   transitions: Transition {
                     from: "change_rpm_dial2"; to: "change_rpm_dial1"; reversible:true
@@ -844,8 +922,8 @@ ApplicationWindow {
 
             Image {
                 id: rpmOverlay
-                x: switch(cluster.configurableDial_index){case 1:78;break;case 2:98;break;}
-                y: switch(cluster.configurableDial_index){case 1:127;break;case 2:157;break;}
+                x: switch(cluster.configurableDial_index){case 1:78;break;case 2:98;break;case 3:98;break;}
+                y: switch(cluster.configurableDial_index){case 1:127;break;case 2:157;break;case 3:157;break;}
                 z: 3
                 opacity: 0
                 source: "image/overlay_active.png"
@@ -854,12 +932,12 @@ ApplicationWindow {
 
             Image  {
                 id: needle
-                x: switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;} //76
-                y: switch(cluster.configurableDial_index){case 1:64;break;case 2:84;break;}
+                x: switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;case 3:102;break;} //76
+                y: switch(cluster.configurableDial_index){case 1:64;break;case 2:84;break;case 3:84;break;}
                 z:4
                 clip: true
                 scale: 1
-                opacity: 1
+                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:1}
                 smooth: true
                 source: cluster.configurablePointer
                 transform: Rotation  {
@@ -871,6 +949,8 @@ ApplicationWindow {
                            case 1:(Math.min(Math.max(-180, rpmMeter.value1*2.6 - 180),150));
                                break;
                            case 2:(Math.min(Math.max(-130, rpmMeter.value1*2.6 - 130),133));
+                               break;
+                           case 3:(Math.min(Math.max(-93, rpmMeter.value1*2.6 - 130),133));
                                break;
                           }
 /**/
@@ -1046,32 +1126,48 @@ ApplicationWindow {
             id: dialEffectStart
             running: false
 
-            NumberAnimation { target:digitalSpeed; property:"x";to:digitalSpeed.x+180; duration: 500 }
-            NumberAnimation { target:digitalSpeed; property:"y";to:digitalSpeed.y-70; duration: 500 }
-            NumberAnimation { target:digitalSpeed; property:"visible";to:1; duration: 100}
-            NumberAnimation { target:speed_up; property:"x";to:digitalSpeed.x+185; duration: 500 }
-            NumberAnimation { target:speed_up; property:"y";to:digitalSpeed.y-42; duration: 500 }
-            NumberAnimation { target:speed_up; property:"visible";to:1; duration: 100}
-            NumberAnimation { target:speed_down; property:"x";to:digitalSpeed.x+180; duration: 500 }
-            NumberAnimation { target:speed_down; property:"y";to:digitalSpeed.y-98; duration: 500 }
-            NumberAnimation { target:speed_down; property:"visible";to:1; duration: 100}
-            NumberAnimation { target:display_gear; property:  "opacity"; to: 1; duration: 1500}
+            NumberAnimation { target:digitalSpeed;  property:"x";to:digitalSpeed.x+180;     duration: 500 }
+            NumberAnimation { target:digitalSpeed;  property:"y";to:digitalSpeed.y-20;      duration: 500 }
+            NumberAnimation { target:digitalSpeed;  property:"visible";to:1;                duration: 100}
+            //NumberAnimation { target:speed_up; property:"x";to:digitalSpeed.x+185; duration: 500 }
+            //NumberAnimation { target:speed_up; property:"y";to:digitalSpeed.y-42; duration: 500 }
+            //NumberAnimation { target:speed_up; property:"visible";to:1; duration: 100}
+            //NumberAnimation { target:speed_down; property:"x";to:digitalSpeed.x+180; duration: 500 }
+            //NumberAnimation { target:speed_down; property:"y";to:digitalSpeed.y-98; duration: 500 }
+            //NumberAnimation { target:speed_down; property:"visible";to:1; duration: 100}
+            NumberAnimation { target:display_gear;  property:"opacity";to:1; duration: 1500}
+            NumberAnimation { target:gear_image;    property:"opacity";to:1; duration: 1500}
 
-            NumberAnimation{ target: rpm_active;property: "opacity" ;to:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;}duration: 1000}
-            NumberAnimation { target:rpm_active; property:"x";to:rpm_active.x-179; duration: 500 }
-            NumberAnimation { target:rpm_inactive; property:"x";to:switch(cluster.configurableDial_index){case 1:rpm_inactive.x-145;break;case 2:rpm_inactive.x-175;break;}duration: 500 }
-            NumberAnimation { target:needle; property: "x"; to:switch(cluster.configurableDial_index){case 1:needle.x-152;break;case 2:needle.x-179;break;}duration: 500}
-            //NumberAnimation { target:rpmOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:rpmOverlay.x-155;break;case 2:rpmOverlay.x-179;break;}duration: 500}
-
-            NumberAnimation { target:rpm_active; property:"y";to:rpm_active.y-30; duration: 500 }
-            NumberAnimation { target:rpm_inactive; property:"y";to:switch(cluster.configurableDial_index){case 1:rpm_inactive.y-2;break;case 2:rpm_inactive.y-30;break;}duration: 500 }
-            NumberAnimation { target:needle; property: "y"; to:switch(cluster.configurableDial_index){case 1:needle.y-20;break;case 2:needle.y-30;break;}duration: 500}
-            //NumberAnimation { target:rpmOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:rpmOverlay.y-20;break;case 2:rpmOverlay.y-30;break;}duration: 500}
-
-            NumberAnimation { target:rpm_active; property:"scale";to:1.2; duration: 500 }
-            NumberAnimation { target:rpm_inactive;property:"scale";to:switch(cluster.configurableDial_index){case 1:1.40;break;case 2:1.2;break;}duration: 500}
-            NumberAnimation { target:needle; property: "scale"; to:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}duration: 500}
+            NumberAnimation { target:rpm_active;    property:"opacity";to:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;case 3:0;break;}duration: 1000}
+            NumberAnimation { target:rpm_active;    property:"x";to:rpm_active.x-179;  duration: 500 }
+            NumberAnimation { target:rpm_active;    property:"y";to:rpm_active.y-30;   duration: 500 }
+            NumberAnimation { target:rpm_active;    property:"scale";to:1.2;           duration: 500 }
+            NumberAnimation { target:rpm_inactive;  property:"scale";to:switch(cluster.configurableDial_index){case 1:1.40;break;case 2:1.2;break;}duration: 500}
+            NumberAnimation { target:rpm_inactive;  property:"y";to:switch(cluster.configurableDial_index){case 1:rpm_inactive.y-2;break;case 2:rpm_inactive.y-30;break;}duration: 500 }
+            NumberAnimation { target:rpm_inactive;  property:"x";to:switch(cluster.configurableDial_index){case 1:rpm_inactive.x-145;break;case 2:rpm_inactive.x-175;break;}duration: 500 }
+            NumberAnimation { target:needle;        property:"x"; to:switch(cluster.configurableDial_index){case 1:needle.x-152;break;case 2:needle.x-179;break;case 3:needle.x-182;break;}duration: 500}
+            NumberAnimation { target:needle;        property:"y"; to:switch(cluster.configurableDial_index){case 1:needle.y-20;break;case 2:needle.y-30;break;case 3:needle.y-37;break;}duration: 500}
+            NumberAnimation { target:needle;        property:"scale"; to:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}duration: 500}
+            //NumberAnimation { target:rpmOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:rpmOverlay.x-155;break;case 2:rpmOverlay.x-179;break;}duration: 500}            
+            //NumberAnimation { target:rpmOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:rpmOverlay.y-20;break;case 2:rpmOverlay.y-30;break;}duration: 500}            
             //NumberAnimation { target:rpmOverlay; property: "scale"; to:switch(cluster.configurableDial_index){case 1:1.5;break;case 2:1.2;break;}duration: 500}
+
+            NumberAnimation { target:speed_active;      property:"opacity";to:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;case 3:0;break;}duration: 1000}
+            NumberAnimation { target:speed_active;      property:"x";to:speed_active.x+195; duration: 500 }
+            NumberAnimation { target:speed_active;      property:"y";to:speed_active.y-30; duration: 500 }
+            NumberAnimation { target:speed_active;      property:"scale";to:1.2; duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"scale";to:switch(cluster.configurableDial_index){case 1:1.40;break;case 2:1.2;break;}duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"y";to:switch(cluster.configurableDial_index){case 1:speed_inactive.y-2;break;case 2:speed_inactive.y-30;break;}duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"x";to:switch(cluster.configurableDial_index){case 1:speed_inactive.x+175;break;case 2:speed_inactive.x+195;break;}duration: 500 }
+            NumberAnimation { target:needle1;           property:"x"; to:switch(cluster.configurableDial_index){case 1:needle1.x+182;break;case 2:needle1.x+195;break;case 3:needle1.x+190;break;}duration: 500}
+            NumberAnimation { target:needle1;           property:"y"; to:switch(cluster.configurableDial_index){case 1:needle1.y-20;break;case 2:needle1.y-30;break;case 3:needle1.y-35;break;}duration: 500}
+            NumberAnimation { target:needle1;           property:"scale";to:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}duration: 500}
+            //NumberAnimation { target:speedOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:needle1.x+173;break;case 2:speedOverlay.x+195;break;}duration: 500}
+            //NumberAnimation { target:speedOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:needle1.y+32;break;case 2:speedOverlay.y-30;break;}duration: 500}
+            //NumberAnimation { target:speedOverlay; property: "scale"; to:switch(cluster.configurableDial_index){case 1:1.5;break;case 2:1.2;break;}duration: 500}
+
+
+
 
             NumberAnimation { target: turn_left; property: "opacity"; to: 0.2; duration: 100}
             NumberAnimation { target: turn_right; property: "opacity"; to: 0.2; duration: 500}
@@ -1079,21 +1175,8 @@ ApplicationWindow {
             NumberAnimation { target: turn_right; property: "x"; to: turn_right.x+70; duration: 500}
 
 
-            NumberAnimation{ target: speed_active; property:"opacity"; to:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;}duration: 1000}
-            NumberAnimation { target:speed_active; property:"x";to: speed_active.x+195; duration: 500 }
-            NumberAnimation { target:speed_inactive; property:"x";to:switch(cluster.configurableDial_index){case 1:speed_inactive.x+175;break;case 2:speed_inactive.x+195;break;}duration: 500 }
-            NumberAnimation { target:needle1; property: "x"; to:switch(cluster.configurableDial_index){case 1:needle1.x+182;break;case 2:needle1.x+195;break;}duration: 500}
-            //NumberAnimation { target:speedOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:needle1.x+173;break;case 2:speedOverlay.x+195;break;}duration: 500}
 
-            NumberAnimation { target:speed_active; property:"y";to: speed_active.y-30; duration: 500 }
-            NumberAnimation { target:speed_inactive; property:"y";to:switch(cluster.configurableDial_index){case 1:speed_inactive.y-2;break;case 2:speed_inactive.y-30;break;}duration: 500 }
-            NumberAnimation { target:needle1; property: "y"; to:switch(cluster.configurableDial_index){case 1:needle1.y-20;break;case 2:needle1.y-30;break;}duration: 500}
-            //NumberAnimation { target:speedOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:needle1.y+32;break;case 2:speedOverlay.y-30;break;}duration: 500}
 
-            NumberAnimation { target:speed_active; property:"scale";to: 1.2; duration: 500 }
-            NumberAnimation { target:speed_inactive; property:"scale";to:switch(cluster.configurableDial_index){case 1:1.40;break;case 2:1.2;break;}duration: 500 }
-            NumberAnimation { target:needle1; property: "scale"; to:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}duration: 500}
-            //NumberAnimation { target:speedOverlay; property: "scale"; to:switch(cluster.configurableDial_index){case 1:1.5;break;case 2:1.2;break;}duration: 500}
 
 
             NumberAnimation{ target: totalDistance; property: "opacity"; to: 1.0; duration: 1000}
@@ -1120,27 +1203,49 @@ ApplicationWindow {
             //NumberAnimation{target: digitRectangle; property: "opacity"; to: 0; duration: 1000}
 
             //Throwing the RPM meter sideways
-            NumberAnimation { target:rpm_active; property:"x";to:241 ; duration: 500 } //241
-            NumberAnimation { target:rpm_inactive; property:"x";to: -30; duration: 500 }
-            NumberAnimation { target:needle; property: "x"; to:switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;}duration: 500}
-            //NumberAnimation { target:rpmOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:78;break;case 2:98;break;}duration: 500}
-            NumberAnimation { target:speed_up; property:"x";to:840; duration: 500 }
-            NumberAnimation { target:speed_up; property:"y";to:210; duration: 500 }
-            NumberAnimation { target:speed_up; property:"visible";to:0; duration: 100}
-            NumberAnimation { target:speed_down; property:"x";to:840; duration: 500 }
-            NumberAnimation { target:speed_down; property:"y";to:250; duration: 500 }
-            NumberAnimation { target:speed_down; property:"visible";to:0; duration: 100}
-            NumberAnimation { target:display_gear; property:  "opacity"; to: 0; duration: 1500}
 
-            NumberAnimation { target:rpm_active; property:  "opacity"; to: 0; duration: 1500}
-            NumberAnimation { target:rpm_active; property:"y";to:99; duration: 500 }
-            NumberAnimation { target:rpm_inactive; property:"y";to:20; duration: 500 }
-            NumberAnimation { target:needle; property: "y"; to:switch(cluster.configurableDial_index){case 1:64;break;case 2:84;break;}duration: 500}
+            NumberAnimation { target:rpm_active;    property:"opacity";to: 0;   duration: 1500}
+            NumberAnimation { target:rpm_active;    property:"x";to:241 ;       duration: 500 } //241
+            NumberAnimation { target:rpm_active;    property:"y";to:99;         duration: 500 }
+            NumberAnimation { target:rpm_active;    property:"scale";to:1;      duration: 500 }
+            NumberAnimation { target:rpm_inactive;  property:"y";to:20;         duration: 500 }
+            NumberAnimation { target:rpm_inactive;  property:"x";to: -30;       duration: 500 }
+            NumberAnimation { target:rpm_inactive;  property:"scale";to:1;      duration: 500 }
+            NumberAnimation { target:needle;        property:"x";to:switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;case 3:95;break;}duration: 500}
+            NumberAnimation { target:needle;        property:"y";to:switch(cluster.configurableDial_index){case 1:64;break;case 2:84; break;case 3:84;break;}duration: 500}
+            NumberAnimation { target:needle;        property:"scale"; to:1;     duration: 500}
+
+            NumberAnimation { target:speed_active;      property:"x";to: 695;       duration: 500 }
+            NumberAnimation { target:speed_active;      property:"opacity"; to: 0;  duration: 1500}
+            NumberAnimation { target:speed_active;      property:"y";to: 95;        duration: 500 }
+            NumberAnimation { target:speed_active;      property:"scale";to: 1;     duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"x";to: -9;        duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"y";to: 28;        duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"scale";to:1;      duration: 500 }
+            NumberAnimation { target:needle1;           property:"y";to:switch(cluster.configurableDial_index){case 1:72; break;case 2:91; break;case 3:91; break;}duration: 500}
+            NumberAnimation { target:needle1;           property:"x";to:switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;case 3:120;break;}duration: 500}
+            NumberAnimation { target:needle1;           property:"scale"; to:1;     duration: 500 }
+
+
+            NumberAnimation { target: digitalSpeed; property: "x"; to: 840; duration: 500}
+            NumberAnimation { target: digitalSpeed; property: "y"; to: 280; duration: 500}
+            NumberAnimation { target: digitalSpeed; property: "visible";to:0; duration: 10}
+            //NumberAnimation { target:rpmOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:78;break;case 2:98;break;}duration: 500}
+            ///NumberAnimation { target:speed_up; property:"x";to:840; duration: 500 }
+            ///NumberAnimation { target:speed_up; property:"y";to:210; duration: 500 }
+            ///NumberAnimation { target:speed_up; property:"visible";to:0; duration: 100}
+            ///NumberAnimation { target:speed_down; property:"x";to:840; duration: 500 }
+            ///NumberAnimation { target:speed_down; property:"y";to:250; duration: 500 }
+            ///NumberAnimation { target:speed_down; property:"visible";to:0; duration: 100}
+            NumberAnimation { target:display_gear; property:  "opacity"; to: 0; duration: 1500}
+            NumberAnimation { target:gear_image; property:  "opacity"; to: 0; duration: 1500}
+
+
+
             //NumberAnimation { target:rpmOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:127;break;case 2:157;break;}duration: 500}
 
-            NumberAnimation { target:rpm_active; property:"scale";to:1; duration: 500 }
-            NumberAnimation { target:rpm_inactive; property:"scale";to:1; duration: 500 }
-            NumberAnimation { target:needle; property: "scale"; to:1; duration: 500}
+
+
             //NumberAnimation { target:rpmOverlay; property: "scale"; to:1; duration: 500}
 
 
@@ -1152,29 +1257,15 @@ ApplicationWindow {
             NumberAnimation { target: turn_right; property: "opacity"; to: 0; duration: 10}
 
             //Throwing the Speedo meter sideways
-            NumberAnimation { target:speed_active; property:"x";to: 695; duration: 500 }
-            NumberAnimation { target:speed_inactive; property:"x";to: -9; duration: 500 }
-            NumberAnimation { target:needle1; property: "x"; to:switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;}duration: 500}
-            //NumberAnimation { target:speedOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:135;break;case 2:124;break;}duration: 500}
-            NumberAnimation { target: speed_active; property:  "opacity"; to: 0; duration: 1500}
+           //NumberAnimation { target:speedOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:135;break;case 2:124;break;}duration: 500}
+             //NumberAnimation { target:speedOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:140;break;case 2:160;break;}duration: 500}
 
-            NumberAnimation { target:speed_active; property:"y";to: 95; duration: 500 }
-            NumberAnimation { target:speed_inactive; property:"y";to: 28; duration: 500 }
-            NumberAnimation { target:needle1; property: "y"; to:switch(cluster.configurableDial_index){case 1:72;break;case 2:91;break;}duration: 500}
-            //NumberAnimation { target:speedOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:140;break;case 2:160;break;}duration: 500}
-
-            NumberAnimation { target:speed_active; property:"scale";to: 1; duration: 500 }
-            NumberAnimation { target:speed_inactive; property:"scale";to:1; duration: 500 }
-            NumberAnimation { target:needle1; property: "scale"; to:1; duration: 500}
             //NumberAnimation { target:speedOverlay; property: "scale"; to:1; duration: 500}
 
             //NumberAnimation { target:petrol_indicator; property: "x"; to: 980; duration: 500 }
             //NumberAnimation { target:petrol_indicator; property: "y"; to: 59; duration: 500 }
 
 
-            NumberAnimation { target: digitalSpeed; property: "x"; to: 840; duration: 500}
-            NumberAnimation { target: digitalSpeed; property: "y"; to: 280; duration: 500}
-            NumberAnimation { target: digitalSpeed; property: "visible";to:0; duration: 10}
 
             NumberAnimation{target: totalDistance; property: "opacity"; to: 0; duration: 100}
             NumberAnimation{target: totalDistance; property: "x"; to: 363; duration: 200}

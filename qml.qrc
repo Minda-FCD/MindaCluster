@@ -106,5 +106,14 @@
         <file>image/TRANS 2.png</file>
         <file>image/TRANS TEMP.png</file>
         <file>image/water_in_fuel.png</file>
+        <file>image/Skin_14.jpg</file>
+        <file>image/Skin_15.jpg</file>
+        <file>image/Skin_16.jpg</file>
+        <file>image/original Speedo.png</file>
+        <file>image/RPM.png</file>
+        <file>image/Skin_14.png</file>
+        <file>image/Skin_15.png</file>
+        <file>image/Skin_16.png</file>
+        <file>image/Original RPM.png</file>
     </qresource>
 </RCC>

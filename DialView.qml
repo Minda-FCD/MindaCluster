@@ -23,9 +23,12 @@ FocusScope {
             sourcee:"image/RPM_01.png"
             scalee:0.4
         }
-
         ListElement{
             sourcee:"image/rpm_inactive.png"
+            scalee:0.4
+        }
+        ListElement{
+            sourcee:"image/original Speedo.png"
             scalee:0.4
         }
 

@@ -60,8 +60,26 @@ Item {
                 speed_inactive.y     = cluster.startFlag==true? -2:28
                 speed_inactive.scale = cluster.startFlag==true? 1.2:1
             break;
-
         case 2:
+                cluster.configurableDial="image/original Speedo.png"
+                cluster.configurableDial_index = 3
+
+                rpm_active.opacity   = cluster.startFlag==true? 1:0
+                needle.x             = cluster.startFlag==true?-73:95 //-77:102
+                needle.y             = cluster.startFlag==true? 50:84 //54:84
+                rpm_inactive.x       = cluster.startFlag==true? -205:-30 //
+                rpm_inactive.y       = cluster.startFlag==true? -10:20
+                rpm_inactive.scale   = cluster.startFlag==true? 1.2:1
+
+                speed_active.opacity = cluster.startFlag==true? 1:0
+                needle1.x            = cluster.startFlag==true? 315:120 //319:124
+                needle1.y            = cluster.startFlag==true? 57:91 //61:91
+                speed_inactive.x     = cluster.startFlag==true? 186:-9 //
+                speed_inactive.y     = cluster.startFlag==true? -2:28
+                speed_inactive.scale = cluster.startFlag==true? 1.2:1
+            break;
+
+        case 3:
 
             break;
         }
