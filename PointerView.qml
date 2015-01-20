@@ -37,8 +37,9 @@ FocusScope {
         ListElement{
             source:"image/Pointer6.png"
         }
-
-
+        ListElement{
+            source:"image/Skin_14_Speedo_RPM_Pointer.png"
+        }
     }
 
 }

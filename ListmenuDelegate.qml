@@ -4,6 +4,7 @@ Item {
     id: container
     width: 150; height:50; anchors.margins:5
     property bool raiseFlag
+
     Rectangle {
         id: content
         anchors.centerIn: parent; width:140; height:30;
@@ -13,7 +14,7 @@ Item {
         radius: 10
 
 
-        Rectangle { anchors.fill: parent; anchors.margins:3; color: "#1ae7ee"; antialiasing: true; radius: 8 }
+        Rectangle { anchors.fill: parent; anchors.margins:3; color: "#eae70f"; antialiasing: true; radius: 8 }
     }
 
     Text {

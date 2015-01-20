@@ -21,6 +21,22 @@ Item {
     }
 
     Keys.onSpacePressed: {
+
+       switch(cluster.configurableBackground_index){
+       case 9:
+           switch(index){
+           case 0:
+                  cluster.configurableDial="image/Skin_9_Speedo.png"
+                  cluster.configurableDial_index = 1
+                  break;
+           case 1:
+                  cluster.configurableDial="image/Skin_9_Speedo1.png"
+                  cluster.configurableDial_index = 2
+                  break;
+           }
+           break;
+
+       default:
         switch(index){
         case 0:
                cluster.configurableDial="image/RPM_01.png"
@@ -39,7 +55,7 @@ Item {
                speed_inactive.x     = cluster.startFlag==true? 166:-9
                speed_inactive.y     = cluster.startFlag==true? 26:28
                speed_inactive.scale = cluster.startFlag==true? 1.4:1
-               /* */
+
 
             break;
         case 1:
@@ -55,7 +71,7 @@ Item {
 
                 speed_active.opacity = cluster.startFlag==true? 1:0
                 needle1.x            = cluster.startFlag==true? 319:124
-                needle1.y            = cluster.startFlag==true? 61:91/**/
+                needle1.y            = cluster.startFlag==true? 61:91
                 speed_inactive.x     = cluster.startFlag==true? 186:-9
                 speed_inactive.y     = cluster.startFlag==true? -2:28
                 speed_inactive.scale = cluster.startFlag==true? 1.2:1
@@ -64,17 +80,17 @@ Item {
                 cluster.configurableDial="image/original Speedo.png"
                 cluster.configurableDial_index = 3
 
-                rpm_active.opacity   = cluster.startFlag==true? 1:0
-                needle.x             = cluster.startFlag==true?-73:95 //-77:102
-                needle.y             = cluster.startFlag==true? 50:84 //54:84
-                rpm_inactive.x       = cluster.startFlag==true? -205:-30 //
+                rpm_active.opacity   = cluster.startFlag==true? 0:0
+                needle.x             = cluster.startFlag==true?-84:91
+                needle.y             = cluster.startFlag==true? 50:82
+                rpm_inactive.x       = cluster.startFlag==true? -205:-30  //-205:-30
                 rpm_inactive.y       = cluster.startFlag==true? -10:20
                 rpm_inactive.scale   = cluster.startFlag==true? 1.2:1
 
-                speed_active.opacity = cluster.startFlag==true? 1:0
-                needle1.x            = cluster.startFlag==true? 315:120 //319:124
-                needle1.y            = cluster.startFlag==true? 57:91 //61:91
-                speed_inactive.x     = cluster.startFlag==true? 186:-9 //
+                speed_active.opacity = cluster.startFlag==true? 0:0
+                needle1.x            = cluster.startFlag==true? 307:112
+                needle1.y            = cluster.startFlag==true? 60:90
+                speed_inactive.x     = cluster.startFlag==true? 186:-9
                 speed_inactive.y     = cluster.startFlag==true? -2:28
                 speed_inactive.scale = cluster.startFlag==true? 1.2:1
             break;
@@ -83,6 +99,7 @@ Item {
 
             break;
         }
+    }
 
     }
 

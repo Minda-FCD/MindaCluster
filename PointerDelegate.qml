@@ -40,6 +40,9 @@ Item {
                 cluster.configurablePointer="image/Pointer6.png"
             break;
         case 6:
+                cluster.configurablePointer="image/Skin_14_Speedo_RPM_Pointer.png"
+            break;
+        case 7:
 
             break;
         }

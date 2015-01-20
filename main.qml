@@ -11,7 +11,10 @@ ApplicationWindow {
     Rectangle {
         id: cluster
         width:1280; height: 480;y:100
-        color:"#958b8b"
+        radius: switch(cluster.configurableBackground_index){case 9:90;break;case 12:90;break;default:0}
+        border.color: switch(cluster.configurableBackground_index){case 9:"white";break;case 12:"white";break;default:""}
+        border.width:switch(cluster.configurableBackground_index){case 9:10;break;case 12:10;break;default:0}
+        color: switch(cluster.configurableBackground_index){case 1:"white";break;default:"black"}
 
 
         property bool startFlag: false
@@ -30,11 +33,11 @@ ApplicationWindow {
         property bool parkingFlag: false
         property bool brakeFlag: false
 
-        property string configurablePointer:"image/Pointer3.png"
-        property string configurableBackground:"image/Skin_14.png"
-        property string configurableDial:"image/rpm_inactive.png"
-        property int configurableDial_index:2
-        property int configurableBackground_index:2
+        property string configurablePointer:"image/Pointer5.png"
+        property string configurableBackground:"" //"image/Skin_4.png"
+        property string configurableDial:"image/original Speedo.png"
+        property int configurableDial_index:1
+        property int configurableBackground_index: 9
 
 
         function rpmSpeedMeter(){
@@ -103,7 +106,13 @@ ApplicationWindow {
                            break;
 
                        }
-                       if(speedValue >120)
+                       if(speedValue >120 && configurableBackground_index !=9)
+                       {
+                           rpmValue = speedValue = gear = 0
+                           bounce_gear_image.start()
+                           bounce_display_gear.start()
+                       }
+                       if(configurableBackground_index ==9 && speedValue >180  )
                        {
                            rpmValue = speedValue = gear = 0
                            bounce_gear_image.start()
@@ -127,7 +136,10 @@ ApplicationWindow {
             }
         }
 
-
+    Item{
+        id:all_telltales
+        z:1
+        opacity:switch(cluster.configurableBackground_index){case 9:0;break;case 12:0;break;default:1}
         Image {
                    id: music_icon
                    x: 150
@@ -294,8 +306,9 @@ ApplicationWindow {
                    y: 25
                    z: 1
                    scale: 0.8
+                   opacity:switch(cluster.configurableBackground_index){case 9:0;break;case 12:0;break;default:1}
                    //rotation: 90
-                   source: "image/logo.png"
+                   source: "https://openclipart.org/image/800px/svg_to_png/209635/food-onion.png"
         }
 
         /*Image {
@@ -333,7 +346,7 @@ ApplicationWindow {
                 x: 560
                 y: 208
                 smooth: true
-                opacity: 0.05
+                opacity:switch(cluster.configurableBackground_index){case 12:0;break;default:0.05}
                 z: 3
                 source: "image/turn_indicator_left.png"
         }
@@ -343,7 +356,7 @@ ApplicationWindow {
                     x: 660
                     y: 208
                     smooth: true
-                    opacity: 0.05
+                    opacity:switch(cluster.configurableBackground_index){case 12:0;break;default:0.05}
                     z: 3
                     source: "image/turn_indicator.png"
         }
@@ -431,10 +444,15 @@ ApplicationWindow {
                     //visible: true
                     source: "image/immobilizer.png"
         }
+     }
 
         Image{
-            id:backGround
+            id:backGround            
             anchors.fill:parent
+            //anchors.horizontalCenter: cluster.horizontalCenter
+            //anchors.verticalCenter: cluster.verticalCenter
+            z:0
+            //scale:0.95
             source:cluster.configurableBackground
         }
 
@@ -482,22 +500,27 @@ ApplicationWindow {
             source: "image/speed_active1.png"
         }
 
-
+/**/
         Text {
             id: digitalSpeed
-            x: 840
-            y: 280 //230
+            x: switch(cluster.configurableBackground_index){case 9:if(speedoMeter.value<10){642}else if(9<speedoMeter.value<100){622}if(speedoMeter.value>99){602};break;default:840}
+            y: switch(cluster.configurableBackground_index){case 9:180;break;default:280}
             z: 3
+            //anchors.centerIn: cluster.Center
+            //horizontalAlignment: Text.AlignHCenter
+            //anchors.verticalCenter: skin_9_Speed_dail.verticalCenter
             color: "#cde81d"
             text: parseInt(speedoMeter.value)
-            font.family: "Abyssinica SIL"
-            font.italic: true
+            font.family: "URW Chancery L"
+            //font.family: switch(cluster.configurableBackground_index){case 9:"URW Chancery L";break;default:"Abyssinica SIL"}
+
             smooth: true
-            opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;}}
+            opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;case 9:0;break;case 12:0;break;default:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;}}
             style: Text.Raised
-            font.pixelSize: 35
+            font.pixelSize: switch(cluster.configurableBackground_index){case 9:80;break;default:35}
 
         }
+
 /*
         Text {
             id: speed_down
@@ -535,33 +558,35 @@ ApplicationWindow {
 */
         Image {
             id: neutral
-             x: 598
-             y: 135
+             x: switch(cluster.configurableBackground_index){case 9:630;break;case 12:625;break;default:598}
+             y: switch(cluster.configurableBackground_index){case 9:145;break;case 12:142;break;default:135}
              z: 1
              scale: 0.4
-             //opacity: 0
+             opacity:switch(cluster.configurableBackground_index){case 12:0;break;case 9:0;break;default:1}
              //visible: true
              source: "image/neutral.png"
          }
          Text {
              id: display_gear
-             property int maxHeight: 120 //160 //cluster.height / 3
-             property int minHeight: 153 //320 //2 * cluster.height / 3
-             x: 620
-             y: 153
-             z: 1
-             color: "#cde81d" //"#ee0ed0"
+             property int maxHeight: 110 //160 //cluster.height / 3
+             property int minHeight: 137 //320 //2 * cluster.height / 3
+             x: switch(cluster.configurableBackground_index){case 9:662;break;case 12:645;break;default:620}
+             y: 137
+             z: 4
+             color: "#92ea45" //"#ee0ed0"
              text: parseInt(cluster.gear)
              font.family: "Abyssinica SIL"
              horizontalAlignment: Text.AlignHCenter
              smooth: true
              opacity: 0
              style: Text.Raised
-             font.pixelSize: 37
+             font.pixelSize: 30
 
              SequentialAnimation on y {
                  id: bounce_display_gear
                  //loops: Animation.Infinite
+                 //transform: Rotation{angle:{30}}
+
                  // Move from minHeight to maxHeight in 300ms, using the OutExpo easing function
                  NumberAnimation {
                      from: display_gear.minHeight; to: display_gear.maxHeight
@@ -580,17 +605,19 @@ ApplicationWindow {
 
          Image {
                  id: gear_image
-                 property int maxHeight: 80 //160 //cluster.height / 3
-                 property int minHeight: 110 //320 //2 * cluster.height / 3
+                 property int maxHeight: 5 //80 //160 //cluster.height / 3
+                 property int minHeight: 28 //110 //320 //2 * cluster.height / 3
 
                  //anchors.horizontalCenter: parent.horizontalCenter
-                 x: 568
-                 y: 110 //minHeight
-                 z: 0
-                 scale:0.4
+                 x: switch(cluster.configurableBackground_index){case 9:540;break;case 12:523;break;default:498} //568
+                 y: 28 //minHeight
+                 z: 3
+                 scale:0.2
                  opacity:0
                  source: "image/settings.png"
-                 //bounce_gear_image.start()
+
+                 //transform: Rotation{angle:{30}}
+
                  SequentialAnimation on y {
                      id: bounce_gear_image
                      //loops: Animation.Infinite
@@ -599,6 +626,7 @@ ApplicationWindow {
                          from: gear_image.minHeight; to: gear_image.maxHeight
                          easing.type: Easing.OutExpo; duration: 300
                      }
+
 
                      // Then move back to minHeight in 1 second, using the OutBounce easing function
                      NumberAnimation {
@@ -786,6 +814,395 @@ ApplicationWindow {
             font.pixelSize: 15
         }
 
+        Item{
+            id:skin_9
+            scale:0.8
+            x:130; y:60
+            Image {
+                id: skin_9_RPM_dail
+                x: 190 //290
+                y: 103
+                //anchors.horizontalCenter: cluster.horizontalCenter+100
+                //anchors.verticalCenter: cluster.verticalCenter
+                z: 1
+                scale:1 //0.50
+                opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                source: "image/Skin_9_RPM.png"
+                states:[
+                    State {
+                        name: "skin_9_change_RPM_dial1"; when: cluster.configurableDial_index == 1
+                        PropertyChanges { target: skin_9_RPM_dail; source:"image/Skin_9_RPM.png"}
+                    },
+                   State {
+                        name: "skin_9_change_RPM_dial2"; when: cluster.configurableDial_index == 2
+                        PropertyChanges { target: skin_9_RPM_dail; source:"image/Skin_9_RPM1.png"}
+                    }
+                  ]
+                Image{
+                   id:skin_9_RPM_Black_Patch
+                   anchors.horizontalCenter: parent.horizontalCenter
+                   anchors.verticalCenter: parent.verticalCenter
+                   z: 3
+                   scale:1
+                   opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                   source: "image/Skin_9_RPM_Black_Patch.png"
+
+                }
+                Image {
+                    id: skin_9_RPM_pointer
+                    y:23
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.verticalCenter: parent.verticalCenter
+                    z: 2
+                    scale:1
+                    opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                    source: "image/Skin_9_RPM Pointer.png"
+                    states:[
+                        State {
+                            name: "skin_9_change_RPM_pointer1"; when: cluster.configurableDial_index == 1
+                            PropertyChanges { target: skin_9_RPM_pointer; source:"image/Skin_9_RPM Pointer.png"}
+                        },
+                       State {
+                            name: "skin_9_change_RPM_pointer2"; when: cluster.configurableDial_index == 2
+                            PropertyChanges { target: skin_9_RPM_pointer; source:"image/Skin_9_RPM Pointer.png"}
+                        }
+                      ]
+                    transform: Rotation  {
+                        id: skin_9_RPM_pointer_Rotation
+                        origin.x: 3
+                        origin.y: 114
+                        angle:{
+                                (Math.min(Math.max(-180, rpmMeter.value1*2.2 - 180), 28));
+                               }
+    /**/
+                        Behavior on angle  {
+                            SpringAnimation  {
+                                spring: 1.4
+                                damping: .15
+                            }
+                        }
+                    }
+                }
+            }
+            Image {
+                id: skin_9_Speed_dail
+                x: 480
+                y: 60
+                //anchors.horizontalCenter:
+                //anchors.verticalCenter: 240
+                z: 2
+                scale:1 //0.50
+                opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                source: "image/Skin_9_Speedo.png"
+                states:[
+                    State {
+                        name: "skin_9_change_speed_dial1"; when: cluster.configurableDial_index == 1
+                        PropertyChanges { target: skin_9_Speed_dail; source:"image/Skin_9_Speedo.png"}
+                    },
+                   State {
+                        name: "skin_9_change_speed_dial2"; when: cluster.configurableDial_index == 2
+                        PropertyChanges { target: skin_9_Speed_dail; source:"image/Skin_9_Speedo1.png"}
+                    }
+                  ]
+                Image{
+                   id:skin_9_Speedo_Blank_Patch
+                   anchors.horizontalCenter: parent.horizontalCenter
+                   anchors.verticalCenter: parent.verticalCenter
+                   z: 4
+                   scale:1
+                   opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                   source: "image/Skin_9_Speedo_Blank_Patch.png"
+
+                }
+
+                Image {
+                    id: skin_9_Speed_pointer
+                    //x: 650
+                    y: 47
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.verticalCenter: parent.verticalCenter
+                    z: 3
+                    scale:1.3
+                    opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                    source: "image/Skin_9_RPM Pointer.png"
+                    transform: Rotation  {
+                        id: skin_9_Speed_pointer_Rotation
+                        origin.x: 3
+                        origin.y: 134
+                        angle:{
+                                (Math.min(Math.max(-125, speedoMeter.value*1.4 - 125), 125));
+                               }
+    /**/
+                        Behavior on angle  {
+                            SpringAnimation  {
+                                spring: 1.4
+                                damping: .15
+                            }
+                        }
+                    }
+                }
+            }
+            Image {
+                id: skin_9_FG_TG_dail
+                x: 850 //750
+                y: 103
+                //anchors.horizontalCenter: cluster.horizontalCenter+100
+                //anchors.verticalCenter: cluster.verticalCenter
+                z: 1
+                scale:1 //0.50
+                opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                source: "image/Skin_9_TG & FG.png"
+                states:[
+                    State {
+                        name: "skin_9_change_FG_TG_dial1"; when: cluster.configurableDial_index == 1
+                        PropertyChanges { target: skin_9_FG_TG_dail; source:"image/Skin_9_TG & FG.png"}
+                    },
+                   State {
+                        name: "skin_9_change_FG_TG_dial2"; when: cluster.configurableDial_index == 2
+                        PropertyChanges { target: skin_9_FG_TG_dail; source:"image/Skin_9_FG_TG1.png"}
+                    }
+                  ]
+                Image{
+                   id:skin_9_Temp_Blank_Patch
+                   anchors.horizontalCenter: parent.horizontalCenter
+                   anchors.verticalCenter: parent.verticalCenter
+                   z: 3
+                   scale:1
+                   opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                   source: "image/Skin_9_Temp_Blank_Patch.png"
+
+                }
+
+                Image {
+                    id: skin_9_FG_pointer
+                    y:24
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.verticalCenter: parent.verticalCenter
+                    z: 2
+                    scale:1
+                    opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                    source: "image/Skin_9_Fuel Pointer.png"
+                    transform: Rotation  {
+                        id: skin_9_FG_pointer_Rotation
+                        origin.x: 3
+                        origin.y: 114
+                        angle:{
+                                (Math.min(Math.max(-30, speedoMeter.value*2.6 - 30), 29));
+                               }
+    /**/
+                        Behavior on angle  {
+                            SpringAnimation  {
+                                spring: 1.4
+                                damping: .15
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        Item{
+            id:skin_Blank
+            //anchors.centerIn: cluster.Center
+            x:140; y:60
+            scale: 0.8
+
+            Image {
+                id: skin_Blank_RPM_dail
+                x: 577
+                y: -100
+                //anchors.horizontalCenter: cluster.horizontalCenter+100
+                //anchors.verticalCenter: cluster.verticalCenter
+                z: 1
+                scale:0.50
+                opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                source: "image/Skin_Blank_RPM_Dial.png"
+
+                Image {
+                    id: skin_Blank_RPM_pointer
+                    //x: 650
+                    y: 120
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.verticalCenter: parent.verticalCenter
+                    z: 2
+                    scale:0.9
+                    opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                    source: "image/Skin_Blank_Speedo_RPM_Pointer.png"
+                    transform: Rotation  {
+                        id: skin_Blank_RPM_pointer_Rotation
+                        origin.x: 61
+                        origin.y: 213
+                        angle:{
+      //                          (Math.min(Math.max(130, speedoMeter.value*2.6), 130));
+                                Math.min(130,Math.max(0,(120-rpmMeter.value1*0.8)))
+
+
+                               }
+    /**/
+                        Behavior on angle  {
+                            SpringAnimation  {
+                                spring: 1.4
+                                damping: .15
+                            }
+                        }
+                    }
+                }
+            }
+
+            Image {
+                id: skin_Blank_Graphics
+                x: 300
+                y: 5
+                //anchors.horizontalCenter: cluster.horizontalCenter
+                //anchors.verticalCenter: cluster.verticalCenter
+                z: 2
+                scale:0.53
+                opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                source: "image/Skin_Blank_Graphic.png"
+
+
+            }
+
+            Image {
+                id: skin_Blank_Speedo_dail
+                x: 47
+                y: -100
+                //anchors.horizontalCenter: cluster.horizontalCenter-100
+                //anchors.verticalCenter: cluster.verticalCenter
+                z: 1
+                scale:0.50
+                opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                source: "image/Skin_Blank_Speedo_Dial.png"
+
+                Image {
+                    id: skin_Blank_Speedo_pointer
+                    //x: 160
+                    y: 120
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.verticalCenter: parent.verticalCenter
+                    z: 2
+                    scale:0.9
+                    opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                    source: "image/Skin_Blank_Speedo_RPM_Pointer.png"
+                    transform: Rotation  {
+                        id: skin_Blank_Speedo_pointer_Rotation
+                        origin.x: 61
+                        origin.y: 213
+                        angle:{
+                                (Math.min(Math.max(-130, speedoMeter.value*1.1 - 130), 0));
+                               }
+    /**/
+                        Behavior on angle  {
+                            SpringAnimation  {
+                                spring: 1.4
+                                damping: .15
+                            }
+                        }
+                    }
+                }
+            }
+            Image {
+                id: skin_Blank_FG_dail
+                x: 260 //20
+                y: 110 //250
+                //anchors.horizontalCenter: parent.horizontalCenter
+                //anchors.verticalCenter: parent.verticalCenter
+                z: 0
+                scale:0.5
+                opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                source: "image/Skin_Blank_FG_Dial.png"
+
+                Image {
+                    id: skin_Blank_FG_pointer
+                    //x: 60
+                    y: 40
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.verticalCenter: parent.verticalCenter
+                    z: 2
+                    scale:1
+                    opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                    source: "image/Skin_Blank_Gauge_Pointer.png"
+                    transform: Rotation  {
+                        id: skin_Blank_FG_pointer_Rotation
+                        origin.x: 20
+                        origin.y: 83
+                        angle:{
+                                (Math.min(Math.max(-130, speedoMeter.value*2.6 - 130), 130));
+                               }
+    /**/
+                        Behavior on angle  {
+                            SpringAnimation  {
+                                spring: 1.4
+                                damping: .15
+                            }
+                        }
+                    }
+                }
+            }
+            Image {
+                id: skin_Blank_TG_dail
+                x: 795 //1025
+                y: 110 //250
+                z: 0
+                scale:0.5
+                opacity: switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                source: "image/Skin_Blank_TG_Dial.png"
+
+                Image {
+                    id: skin_Blank_TG_pointer
+                    //x: 850
+                    y: 40
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.verticalCenter: parent.verticalCenter
+                    z: 2
+                    scale:1
+                    opacity:switch(cluster.configurableBackground_index){case 12:1;break;default:0}
+                    source: "image/Skin_Blank_Gauge_Pointer.png"
+                    transform: Rotation  {
+                        id: skin_Blank_TG_pointer_Rotation
+                        origin.x: 20
+                        origin.y: 83
+                        angle:{
+                                (Math.min(Math.max(-130, speedoMeter.value*2.6 - 130), 130));
+                               }
+    /**/
+                        Behavior on angle  {
+                            SpringAnimation  {
+                                spring: 1.4
+                                damping: .15
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        Item{
+            id:skin_14
+
+            Image {
+                id: skin_14_RPM_pointer
+                x: switch(cluster.configurableBackground_index){case 2:90;break;case 3:124;break;}
+                y: switch(cluster.configurableBackground_index){case 2:340;break;case 3:160;break;}
+                z: 3
+                scale:1
+                opacity: switch(cluster.configurableBackground_index){case 2:1;break;case 3:1;break;case 4:1;break;case 5:0;break;default:0}
+                source: "image/Skin_14_Gauge_Pointer.png" //Skin_14_Gauge_Pointer.png"
+            }
+
+            Image {
+                id: skin_14_Speedo_pointer
+                x: switch(cluster.configurableBackground_index){case 2:1024;break;case 3:124;break;}
+                y: switch(cluster.configurableBackground_index){case 2:340;break;case 3:160;break;}
+                z: 3
+                scale:1
+                opacity: switch(cluster.configurableBackground_index){case 2:1;break;case 3:1;break;case 4:1;break;case 5:0;break;default:0}
+                source: "image/Skin_14_Gauge_Pointer.png" //Skin_14_Gauge_Pointer.png"
+            }
+        }
+
 
         Item  {
             id: speedoMeter
@@ -803,7 +1220,7 @@ ApplicationWindow {
                 id: speed_inactive;
                 x: -9;
                 y: 28;
-                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:0.8}
+                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;case 8:0;break;case 9:0;break;case 12:0;break;default:0.8}
                 z: 3;
                 //scale:0.7
                 //source: "image/speed_inactive.png"
@@ -840,10 +1257,10 @@ ApplicationWindow {
 
             Image  {
                 id: needle1
-                x: switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;case 3:124;break;} //129
-                y: switch(cluster.configurableDial_index){case 1:72;break;case 2:91;break;case 3:91;break;}
+                x: switch(cluster.configurableBackground_index){case 2:188;break;case 3:188;break;case 4:188;break;default:switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;case 3:112;break;}}
+                y: switch(cluster.configurableBackground_index){case 2:111;break;case 3:111;break;case 4:111;break;default:switch(cluster.configurableDial_index){case 1:72;break;case 2:91;break;case 3:90;break;}}
                 clip: true
-                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:1}
+                opacity: switch(cluster.configurableBackground_index){case 5:0;break;case 8:0;break;case 9:0;break;case 12:0;break;default:1}
                 z: 4
                 smooth: true
                 scale:1
@@ -892,7 +1309,7 @@ ApplicationWindow {
                 id: rpm_inactive;
                 x: -30;
                 y: 20;
-                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:0.8}
+                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;case 8:0;break;case 9:0;break;case 12:0;break;default:0.8}
 
                 z: 3;
                 //scale:0.7
@@ -932,12 +1349,12 @@ ApplicationWindow {
 
             Image  {
                 id: needle
-                x: switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;case 3:102;break;} //76
-                y: switch(cluster.configurableDial_index){case 1:64;break;case 2:84;break;case 3:84;break;}
+                x: switch(cluster.configurableBackground_index){case 2:55;break;case 3:55;break;case 4:55;break;default:switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;case 3:91;break;}}
+                y: switch(cluster.configurableBackground_index){case 2:99;break;case 3:99;break;case 4:99;break;default:switch(cluster.configurableDial_index){case 1:64;break;case 2:84;break;case 3:82;break;}}
                 z:4
                 clip: true
                 scale: 1
-                opacity: switch(cluster.configurableBackground_index){case 2:0;break;case 3:0;break;case 4:0;break;case 5:0;break;default:1}
+                opacity: switch(cluster.configurableBackground_index){case 5:0;break;case 8:0;break;case 9:0;break;case 12:0;break;default:1}
                 smooth: true
                 source: cluster.configurablePointer
                 transform: Rotation  {
@@ -999,7 +1416,14 @@ ApplicationWindow {
                 when:viewDialoption.activeFocus
                 PropertyChanges {target:viewDialoption; x:425}
 
-            }
+            }/*,
+
+            State{
+                name: "display_pathview_menu"
+                when:Pathview_menu.activeFocus
+                PropertyChanges {target:Pathview_menu; x:50}
+
+            }*/
 
         ]
 
@@ -1046,6 +1470,8 @@ ApplicationWindow {
 
                 activeFocusOnTab: true //if(cluster.startFlag == false)true;else false;
                 Keys.onSpacePressed: listmenu.focus=true
+
+                Keys.onEnterPressed: Pathview_menu.focus=true
             }
 
 
@@ -1056,6 +1482,13 @@ ApplicationWindow {
 
             }/**/
 
+            /*Pathview_menu {
+                id:menu_pathview
+                //width:250
+                //hieght:150
+                //color:"grey"
+                //opacity:1
+            }*/
 
 
             PointerView{
@@ -1126,9 +1559,26 @@ ApplicationWindow {
             id: dialEffectStart
             running: false
 
-            NumberAnimation { target:digitalSpeed;  property:"x";to:digitalSpeed.x+180;     duration: 500 }
-            NumberAnimation { target:digitalSpeed;  property:"y";to:digitalSpeed.y-20;      duration: 500 }
-            NumberAnimation { target:digitalSpeed;  property:"visible";to:1;                duration: 100}
+
+            NumberAnimation { target:skin_9;  property:"x";to:-130; duration: 1500}
+            NumberAnimation { target:skin_9;  property:"y";to:-50; duration: 1500}
+            NumberAnimation { target:skin_9;  property:"scale";to:1.2; duration: 1500}
+            NumberAnimation { target:skin_9_RPM_dail;  property:"x";to:skin_9_RPM_dail.x+100; duration: 1500}
+            NumberAnimation { target:skin_9_FG_TG_dail;  property:"x";to:skin_9_FG_TG_dail.x-100; duration: 1500}
+
+            NumberAnimation { target:skin_Blank;  property:"x";to:0; duration: 1500}
+            NumberAnimation { target:skin_Blank;  property:"y";to:0; duration: 1500}
+            NumberAnimation { target:skin_Blank;  property:"scale";to:1; duration: 1500}
+            NumberAnimation { target:skin_Blank_FG_dail;  property:"x";to:20; duration: 1500}
+            NumberAnimation { target:skin_Blank_FG_dail;  property:"y";to:250; duration: 1500}
+            NumberAnimation { target:skin_Blank_TG_dail;  property:"x";to:1025; duration: 1500}
+            NumberAnimation { target:skin_Blank_TG_dail;  property:"y";to:250; duration: 1500}
+
+            NumberAnimation { target:digitalSpeed;  property:"x";to:switch(cluster.configurableBackground_index){case 9:632;break;default:digitalSpeed.x+180}     duration: 500 }
+            NumberAnimation { target:digitalSpeed;  property:"y";to:switch(cluster.configurableBackground_index){case 9:180;break;default:digitalSpeed.y-20}      duration: 500 }
+            NumberAnimation { target:digitalSpeed;  property:"visible";to:1;duration: 100}
+            NumberAnimation { target:digitalSpeed;  property: "scale";to:1; duration: 1500}
+            NumberAnimation { target:digitalSpeed;  property:"opacity";to:switch(cluster.configurableBackground_index){case 9:1;break;default:0}      duration: 500 }
             //NumberAnimation { target:speed_up; property:"x";to:digitalSpeed.x+185; duration: 500 }
             //NumberAnimation { target:speed_up; property:"y";to:digitalSpeed.y-42; duration: 500 }
             //NumberAnimation { target:speed_up; property:"visible";to:1; duration: 100}
@@ -1138,46 +1588,38 @@ ApplicationWindow {
             NumberAnimation { target:display_gear;  property:"opacity";to:1; duration: 1500}
             NumberAnimation { target:gear_image;    property:"opacity";to:1; duration: 1500}
 
-            NumberAnimation { target:rpm_active;    property:"opacity";to:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;case 3:0;break;}duration: 1000}
+            NumberAnimation { target:rpm_active;    property:"opacity";to:switch(cluster.configurableBackground_index){case 2:0;break;case 9:0;break;case 12:0;break;default:switch(cluster.configurableDial_index){case 2:1;break;default:0;break;}}duration: 1000}
             NumberAnimation { target:rpm_active;    property:"x";to:rpm_active.x-179;  duration: 500 }
             NumberAnimation { target:rpm_active;    property:"y";to:rpm_active.y-30;   duration: 500 }
             NumberAnimation { target:rpm_active;    property:"scale";to:1.2;           duration: 500 }
-            NumberAnimation { target:rpm_inactive;  property:"scale";to:switch(cluster.configurableDial_index){case 1:1.40;break;case 2:1.2;break;}duration: 500}
-            NumberAnimation { target:rpm_inactive;  property:"y";to:switch(cluster.configurableDial_index){case 1:rpm_inactive.y-2;break;case 2:rpm_inactive.y-30;break;}duration: 500 }
-            NumberAnimation { target:rpm_inactive;  property:"x";to:switch(cluster.configurableDial_index){case 1:rpm_inactive.x-145;break;case 2:rpm_inactive.x-175;break;}duration: 500 }
-            NumberAnimation { target:needle;        property:"x"; to:switch(cluster.configurableDial_index){case 1:needle.x-152;break;case 2:needle.x-179;break;case 3:needle.x-182;break;}duration: 500}
-            NumberAnimation { target:needle;        property:"y"; to:switch(cluster.configurableDial_index){case 1:needle.y-20;break;case 2:needle.y-30;break;case 3:needle.y-37;break;}duration: 500}
-            NumberAnimation { target:needle;        property:"scale"; to:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}duration: 500}
+            NumberAnimation { target:rpm_inactive;  property:"scale";to:switch(cluster.configurableBackground_index){default:switch(cluster.configurableDial_index){case 1:1.40;break;default:1.2;break;}}duration: 500}
+            NumberAnimation { target:rpm_inactive;  property:"x";to:switch(cluster.configurableBackground_index){default:switch(cluster.configurableDial_index){case 1:rpm_inactive.x-145;break;default:rpm_inactive.x-175;break;}}duration: 500 }
+            NumberAnimation { target:rpm_inactive;  property:"y";to:switch(cluster.configurableBackground_index){default:switch(cluster.configurableDial_index){case 1:rpm_inactive.y-2;break;default:rpm_inactive.y-30;break;}}duration: 500 }
+            NumberAnimation { target:needle;        property:"x"; to:switch(cluster.configurableBackground_index){case 2:55;break;default:switch(cluster.configurableDial_index){case 1:needle.x-152;break;case 2:needle.x-179;break;case 3:needle.x-175;break;}}duration: 500}
+            NumberAnimation { target:needle;        property:"y"; to:switch(cluster.configurableBackground_index){case 2:99;break;default:switch(cluster.configurableDial_index){case 1:needle.y-20;break;case 2:needle.y-30;break;case 3:needle.y-32;break;}}duration: 500}
+            NumberAnimation { target:needle;        property:"scale"; to:switch(cluster.configurableBackground_index){case 2:1;break;default:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}}duration: 500}
             //NumberAnimation { target:rpmOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:rpmOverlay.x-155;break;case 2:rpmOverlay.x-179;break;}duration: 500}            
             //NumberAnimation { target:rpmOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:rpmOverlay.y-20;break;case 2:rpmOverlay.y-30;break;}duration: 500}            
             //NumberAnimation { target:rpmOverlay; property: "scale"; to:switch(cluster.configurableDial_index){case 1:1.5;break;case 2:1.2;break;}duration: 500}
 
-            NumberAnimation { target:speed_active;      property:"opacity";to:switch(cluster.configurableDial_index){case 1:0;break;case 2:1;break;case 3:0;break;}duration: 1000}
+            NumberAnimation { target:speed_active;      property:"opacity";to:switch(cluster.configurableBackground_index){case 2:0;break;case 9:0;break;case 12:0;break;default:switch(cluster.configurableDial_index){case 2:1;break;default:0;break;}}duration: 1000}
             NumberAnimation { target:speed_active;      property:"x";to:speed_active.x+195; duration: 500 }
             NumberAnimation { target:speed_active;      property:"y";to:speed_active.y-30; duration: 500 }
             NumberAnimation { target:speed_active;      property:"scale";to:1.2; duration: 500 }
-            NumberAnimation { target:speed_inactive;    property:"scale";to:switch(cluster.configurableDial_index){case 1:1.40;break;case 2:1.2;break;}duration: 500 }
-            NumberAnimation { target:speed_inactive;    property:"y";to:switch(cluster.configurableDial_index){case 1:speed_inactive.y-2;break;case 2:speed_inactive.y-30;break;}duration: 500 }
-            NumberAnimation { target:speed_inactive;    property:"x";to:switch(cluster.configurableDial_index){case 1:speed_inactive.x+175;break;case 2:speed_inactive.x+195;break;}duration: 500 }
-            NumberAnimation { target:needle1;           property:"x"; to:switch(cluster.configurableDial_index){case 1:needle1.x+182;break;case 2:needle1.x+195;break;case 3:needle1.x+190;break;}duration: 500}
-            NumberAnimation { target:needle1;           property:"y"; to:switch(cluster.configurableDial_index){case 1:needle1.y-20;break;case 2:needle1.y-30;break;case 3:needle1.y-35;break;}duration: 500}
-            NumberAnimation { target:needle1;           property:"scale";to:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}duration: 500}
+            NumberAnimation { target:speed_inactive;    property:"scale";to:switch(cluster.configurableBackground_index){default:switch(cluster.configurableDial_index){case 1:1.40;break;default:1.2;break;}}duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"x";to:switch(cluster.configurableBackground_index){default:switch(cluster.configurableDial_index){case 1:speed_inactive.x+175;break;default:speed_inactive.x+195;break;}}duration: 500 }
+            NumberAnimation { target:speed_inactive;    property:"y";to:switch(cluster.configurableBackground_index){default:switch(cluster.configurableDial_index){case 1:speed_inactive.y-2;break;default:speed_inactive.y-30;break;}}duration: 500 }
+            NumberAnimation { target:needle1;           property:"x";to:switch(cluster.configurableBackground_index){case 2:188;break;default:switch(cluster.configurableDial_index){case 1:needle1.x+182;break;case 2:needle1.x+195;break;case 3:needle1.x+195;break;}}duration: 500}
+            NumberAnimation { target:needle1;           property:"y";to:switch(cluster.configurableBackground_index){case 2:111;break;default:switch(cluster.configurableDial_index){case 1:needle1.y-20;break;case 2:needle1.y-30;break;case 3:needle1.y-30;break;}}duration: 500}
+            NumberAnimation { target:needle1;           property:"scale";to:switch(cluster.configurableBackground_index){case 2:1;break;default:switch(cluster.configurableDial_index){case 1:1.2;break;case 2:1.2;break;}}duration: 500}
             //NumberAnimation { target:speedOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:needle1.x+173;break;case 2:speedOverlay.x+195;break;}duration: 500}
             //NumberAnimation { target:speedOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:needle1.y+32;break;case 2:speedOverlay.y-30;break;}duration: 500}
             //NumberAnimation { target:speedOverlay; property: "scale"; to:switch(cluster.configurableDial_index){case 1:1.5;break;case 2:1.2;break;}duration: 500}
-
-
-
 
             NumberAnimation { target: turn_left; property: "opacity"; to: 0.2; duration: 100}
             NumberAnimation { target: turn_right; property: "opacity"; to: 0.2; duration: 500}
             NumberAnimation { target: turn_left; property: "x"; to: turn_left.x-70; duration: 500}
             NumberAnimation { target: turn_right; property: "x"; to: turn_right.x+70; duration: 500}
-
-
-
-
-
 
             NumberAnimation{ target: totalDistance; property: "opacity"; to: 1.0; duration: 1000}
             NumberAnimation{target: totalDistance; property: "x"; to: 150; duration: 800}
@@ -1200,9 +1642,19 @@ ApplicationWindow {
             id: dialEffectStop
             running: false
 
-            //NumberAnimation{target: digitRectangle; property: "opacity"; to: 0; duration: 1000}
+            NumberAnimation { target:skin_9;  property:"x";to:130; duration: 1500}
+            NumberAnimation { target:skin_9;  property:"y";to:60; duration: 1500}
+            NumberAnimation { target:skin_9;  property:"scale";to:0.8; duration: 1500}
+            NumberAnimation { target:skin_9_RPM_dail;  property:"x";to:190; duration: 1500} //290
+            NumberAnimation { target:skin_9_FG_TG_dail;  property:"x";to:850; duration: 1500} //750
 
-            //Throwing the RPM meter sideways
+            NumberAnimation { target:skin_Blank;  property:"x";to:140; duration: 1500}
+            NumberAnimation { target:skin_Blank;  property:"y";to:60; duration: 1500}
+            NumberAnimation { target:skin_Blank;  property:"scale";to:0.8; duration: 1500}
+            NumberAnimation { target:skin_Blank_FG_dail;  property:"x";to:260; duration: 1500}
+            NumberAnimation { target:skin_Blank_FG_dail;  property:"y";to:110; duration: 1500}
+            NumberAnimation { target:skin_Blank_TG_dail;  property:"x";to:795; duration: 1500}
+            NumberAnimation { target:skin_Blank_TG_dail;  property:"y";to:110; duration: 1500}
 
             NumberAnimation { target:rpm_active;    property:"opacity";to: 0;   duration: 1500}
             NumberAnimation { target:rpm_active;    property:"x";to:241 ;       duration: 500 } //241
@@ -1211,8 +1663,8 @@ ApplicationWindow {
             NumberAnimation { target:rpm_inactive;  property:"y";to:20;         duration: 500 }
             NumberAnimation { target:rpm_inactive;  property:"x";to: -30;       duration: 500 }
             NumberAnimation { target:rpm_inactive;  property:"scale";to:1;      duration: 500 }
-            NumberAnimation { target:needle;        property:"x";to:switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;case 3:95;break;}duration: 500}
-            NumberAnimation { target:needle;        property:"y";to:switch(cluster.configurableDial_index){case 1:64;break;case 2:84; break;case 3:84;break;}duration: 500}
+            NumberAnimation { target:needle;        property:"x";to:switch(cluster.configurableBackground_index){case 2:55;break;default:switch(cluster.configurableDial_index){case 1:74;break;case 2:102;break;case 3:91;break;}}duration: 500}
+            NumberAnimation { target:needle;        property:"y";to:switch(cluster.configurableBackground_index){case 2:99;break;default:switch(cluster.configurableDial_index){case 1:64;break;case 2:84; break;case 3:82;break;}}duration: 500}
             NumberAnimation { target:needle;        property:"scale"; to:1;     duration: 500}
 
             NumberAnimation { target:speed_active;      property:"x";to: 695;       duration: 500 }
@@ -1221,15 +1673,16 @@ ApplicationWindow {
             NumberAnimation { target:speed_active;      property:"scale";to: 1;     duration: 500 }
             NumberAnimation { target:speed_inactive;    property:"x";to: -9;        duration: 500 }
             NumberAnimation { target:speed_inactive;    property:"y";to: 28;        duration: 500 }
-            NumberAnimation { target:speed_inactive;    property:"scale";to:1;      duration: 500 }
-            NumberAnimation { target:needle1;           property:"y";to:switch(cluster.configurableDial_index){case 1:72; break;case 2:91; break;case 3:91; break;}duration: 500}
-            NumberAnimation { target:needle1;           property:"x";to:switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;case 3:120;break;}duration: 500}
+            NumberAnimation { target:speed_inactive;    property:"scale";to:1;      duration: 500 }            
+            NumberAnimation { target:needle1;           property:"x";to:switch(cluster.configurableBackground_index){case 2:188;break;default:switch(cluster.configurableDial_index){case 1:127;break;case 2:124;break;case 3:112;break;}}duration: 500}
+            NumberAnimation { target:needle1;           property:"y";to:switch(cluster.configurableBackground_index){case 2:111;break;default:switch(cluster.configurableDial_index){case 1:72; break;case 2:91; break;case 3:90; break;}}duration: 500}
             NumberAnimation { target:needle1;           property:"scale"; to:1;     duration: 500 }
 
 
-            NumberAnimation { target: digitalSpeed; property: "x"; to: 840; duration: 500}
-            NumberAnimation { target: digitalSpeed; property: "y"; to: 280; duration: 500}
-            NumberAnimation { target: digitalSpeed; property: "visible";to:0; duration: 10}
+            ///NumberAnimation { target: digitalSpeed; property: "x"; to: 840; duration: 500}
+            ///NumberAnimation { target: digitalSpeed; property: "y"; to: 280; duration: 500}
+            NumberAnimation { target: digitalSpeed; property: "scale";to:0.5; duration: 1500}
+            NumberAnimation { target: digitalSpeed; property: "visible";to:0; duration: 2000}
             //NumberAnimation { target:rpmOverlay; property: "x"; to:switch(cluster.configurableDial_index){case 1:78;break;case 2:98;break;}duration: 500}
             ///NumberAnimation { target:speed_up; property:"x";to:840; duration: 500 }
             ///NumberAnimation { target:speed_up; property:"y";to:210; duration: 500 }
@@ -1340,7 +1793,7 @@ ApplicationWindow {
 
 
             ///NumberAnimation{target: fuel_gauge; property:  "opacity"; to: 0.1; duration: 100}
-            NumberAnimation{target: neutral; property:  "opacity"; to: 1.0; duration: 100}
+            NumberAnimation{target: neutral; property:  "opacity"; to: 1.0; duration: 1500}
             NumberAnimation{target: stop_engine; property:  "opacity"; to: 1.0; duration: 100}
             NumberAnimation{target: water_in_fuel; property:  "opacity"; to: 1.0; duration: 100}
             NumberAnimation{target: low_aux_air; property:  "opacity"; to: 1.0; duration: 100}

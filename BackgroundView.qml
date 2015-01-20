@@ -21,7 +21,7 @@ FocusScope {
 
 
         ListElement{
-            sourcee:"image/Skin_4.png"
+            sourcee:"image/Skin_9.png"
             scalee:0.22
             widthh:1082
             Heightt:480
@@ -45,7 +45,7 @@ FocusScope {
             Heightt:480
         }
         ListElement{
-            sourcee:"image/Skin_5.png"
+            sourcee:"image/Skin_4.png" //
             scalee: 0.22
             widthh:1082
             Heightt:480
@@ -69,7 +69,7 @@ FocusScope {
             Heightt:480
         }
         ListElement{
-            sourcee:"image/Skin_9.png"
+            sourcee:"image/Skin_5.png" //Skin_9
             scalee:0.22
             widthh:1082
             Heightt:480
@@ -81,13 +81,13 @@ FocusScope {
             Heightt:480
         }
         ListElement{
-            sourcee:"image/Skin_1.png"
+            sourcee:"image/Skin_11.png"
             scalee:0.22
             widthh:1082
             Heightt:480
         }
         ListElement{
-            sourcee:"image/Skin_2.png"
+            sourcee:"" //"image/Skin_2.png"
             scalee:0.22
             widthh:1082
             Heightt:480
@@ -136,10 +136,10 @@ FocusScope {
             Heightt:177
         }
         ListElement{
-            sourcee:""
-            scalee:1
-            widthh:284
-            Heightt:177
+            sourcee:"image/Skin_4.png"
+            scalee:0.22
+            widthh:1082
+            Heightt:480
         }
 
     }

@@ -106,14 +106,35 @@
         <file>image/TRANS 2.png</file>
         <file>image/TRANS TEMP.png</file>
         <file>image/water_in_fuel.png</file>
-        <file>image/Skin_14.jpg</file>
-        <file>image/Skin_15.jpg</file>
-        <file>image/Skin_16.jpg</file>
         <file>image/original Speedo.png</file>
         <file>image/RPM.png</file>
         <file>image/Skin_14.png</file>
         <file>image/Skin_15.png</file>
         <file>image/Skin_16.png</file>
         <file>image/Original RPM.png</file>
+        <file>image/Skin_14_Gauge_Pointer.png</file>
+        <file>image/Skin_14_Speedo_RPM_Pointer.png</file>
+        <file>image/Skin_11.png</file>
+        <file>image/Skin_Blank_FG_Dial.png</file>
+        <file>image/Skin_Blank_Graphic.png</file>
+        <file>image/Skin_Blank_RPM_Dial.png</file>
+        <file>image/Skin_Blank_Speedo_Dial.png</file>
+        <file>image/Skin_Blank_TG_Dial.png</file>
+        <file>image/Skin_Blank_Gauge_Pointer.png</file>
+        <file>image/Skin_9_Fuel Pointer.png</file>
+        <file>image/Skin_9_RPM.png</file>
+        <file>image/Skin_9_RPM Pointer.png</file>
+        <file>image/Skin_9_Speedo.png</file>
+        <file>image/Skin_9_TG &amp; FG.png</file>
+        <file>image/Skin_9_RPM_Black_Patch.png</file>
+        <file>image/Skin_9_Speedo_Blank_Patch.png</file>
+        <file>image/Skin_9_Temp_Blank_Patch.png</file>
+        <file>image/Skin_Blank_Speedo_RPM_Pointer.png</file>
+        <file>Pathview_menu.qml</file>
+        <file>image/Skin_9_Speedo1.png</file>
+        <file>image/Skin_9_RPM1.png</file>
+        <file>image/Skin_9_FG_TG1.png</file>
+        <file>image/Skin_9_RPM_Pointer1.png</file>
+        <file>image/Skin_9_speedo_Pointer1.png</file>
     </qresource>
 </RCC>
