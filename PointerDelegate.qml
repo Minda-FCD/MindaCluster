@@ -20,6 +20,29 @@ Item {
     }
 
     Keys.onSpacePressed: {
+
+        switch(cluster.configurableBackground_index){
+        case 9:
+            switch(index){
+            case 0:
+                   cluster.skin_9_configurablePointer="image/Skin_9_RPM_Pointer1.png"
+                   break;
+            case 1:
+                   cluster.skin_9_configurablePointer="image/Skin_9_RPM_Pointer2.png"
+                   break;
+            case 2:
+                   cluster.skin_9_configurablePointer="image/Skin_9_RPM_Pointer3.png"
+                   break;
+            case 3:
+                   cluster.skin_9_configurablePointer="image/Skin_9_RPM_Pointer4.png"
+                   break;
+            case 4:
+                   cluster.skin_9_configurablePointer="image/Skin_9_RPM_Pointer5.png"
+                   break;
+            }
+            break;
+
+        default:
         switch(index){
         case 0:
                cluster.configurablePointer="image/Pointer1.png"
@@ -46,6 +69,7 @@ Item {
 
             break;
         }
+      }
 
     }
 

@@ -46,13 +46,11 @@
         <file>StartstopButton.qml</file>
         <file>image/Red.jpg</file>
         <file>image/grass.jpg</file>
-        <file>image/mountain_view.jpg</file>
         <file>image/blue.jpg</file>
         <file>BackgrouldDelegate.qml</file>
         <file>BackgroundView.qml</file>
         <file>image/brown.jpg</file>
         <file>image/hay.jpg</file>
-        <file>image/skyblue.jpg</file>
         <file>DialDelegate.qml</file>
         <file>DialView.qml</file>
         <file>RPM_DialView.qml</file>
@@ -89,16 +87,10 @@
         <file>image/rear_fog.png</file>
         <file>image/RPM_01.png</file>
         <file>image/setbelt col.png</file>
-        <file>image/Skin_1.png</file>
-        <file>image/Skin_2.png</file>
-        <file>image/Skin_3.png</file>
         <file>image/Skin_4.png</file>
-        <file>image/Skin_5.png</file>
         <file>image/Skin_6.png</file>
         <file>image/Skin_7.png</file>
-        <file>image/Skin_8.png</file>
         <file>image/Skin_9.png</file>
-        <file>image/Skin_10.png</file>
         <file>image/Speedo_01.png</file>
         <file>image/stop_engine.png</file>
         <file>image/Temp_Col.png</file>
@@ -107,7 +99,6 @@
         <file>image/TRANS TEMP.png</file>
         <file>image/water_in_fuel.png</file>
         <file>image/original Speedo.png</file>
-        <file>image/RPM.png</file>
         <file>image/Skin_14.png</file>
         <file>image/Skin_15.png</file>
         <file>image/Skin_16.png</file>
@@ -121,9 +112,8 @@
         <file>image/Skin_Blank_Speedo_Dial.png</file>
         <file>image/Skin_Blank_TG_Dial.png</file>
         <file>image/Skin_Blank_Gauge_Pointer.png</file>
-        <file>image/Skin_9_Fuel Pointer.png</file>
         <file>image/Skin_9_RPM.png</file>
-        <file>image/Skin_9_RPM Pointer.png</file>
+        <file>image/Skin_9_RPM_Pointer1.png</file>
         <file>image/Skin_9_Speedo.png</file>
         <file>image/Skin_9_TG &amp; FG.png</file>
         <file>image/Skin_9_RPM_Black_Patch.png</file>
@@ -134,7 +124,10 @@
         <file>image/Skin_9_Speedo1.png</file>
         <file>image/Skin_9_RPM1.png</file>
         <file>image/Skin_9_FG_TG1.png</file>
-        <file>image/Skin_9_RPM_Pointer1.png</file>
-        <file>image/Skin_9_speedo_Pointer1.png</file>
+        <file>image/Skin_9_RPM_Pointer2.png</file>
+        <file>image/Skin_9_RPM_Pointer3.png</file>
+        <file>image/Skin_9_RPM_Pointer4.png</file>
+        <file>image/Skin_9_RPM_Pointer5.png</file>
+        <file>image/car.png</file>
     </qresource>
 </RCC>

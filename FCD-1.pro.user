@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.1.2, 2015-01-20T12:05:20. -->
+<!-- Written by QtCreator 3.1.2, 2015-01-22T09:20:02. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -397,8 +397,8 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
-       <value type="QString">/home/msil/Target_Board/Yocto_BSP/Qt5_Creator_Examples/Switesh/Github_Repository_Switesh/FCD-1/Next_update_3/FCD-1/FCD-1</value>
        <value type="QString">/home/msil/Target_Board/Yocto_BSP/Qt5_Creator_Examples/Switesh/Github_Repository_Switesh/FCD-1/Next_update/FCD-1/FCD-1</value>
+       <value type="QString">/home/msil/Target_Board/Yocto_BSP/Qt5_Creator_Examples/Switesh/Github_Repository_Switesh/FCD-1/Next_update_3/FCD-1/FCD-1</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">192.168.76.215</value>
@@ -413,8 +413,8 @@
        <value type="QString">/opt/poky/1.6.1/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2015-01-20T09:50:47</value>
        <value type="QDateTime">2015-01-16T15:37:56</value>
+       <value type="QDateTime">2015-01-22T09:19:05</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>
@@ -469,8 +469,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">FCD-1 (on Remote Device)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/msil/Target_Board/Yocto_BSP/Qt5_Creator_Examples/Switesh/Github_Repository_Switesh/FCD-1/Next_update_5/FCD-1/FCD-1.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">FCD-1 (on Remote Device)2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/msil/Target_Board/Yocto_BSP/Qt5_Creator_Examples/Switesh/Github_Repository_Switesh/FCD-1/4. Commits on 20 Jan 2015/FCD-1/FCD-1.pro</value>
     <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.Arguments"/>
     <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.ProFile">FCD-1.pro</value>
     <value type="QString" key="RemoteLinux.RunConfig.AlternateRemoteExecutable"></value>

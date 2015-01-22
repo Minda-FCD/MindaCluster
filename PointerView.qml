@@ -8,7 +8,8 @@ FocusScope {
         x:50;width:300;height:300
         focus: true
         orientation: ListView.Horizontal
-        model:pointerOption; cacheBuffer: 100
+        model:switch(cluster.configurableBackground_index){case 9:skin_9_pointerOption;break;default:pointerOption;}
+        cacheBuffer: 100
         delegate: PointerDelegate {}
 
         Behavior on y {
@@ -39,6 +40,26 @@ FocusScope {
         }
         ListElement{
             source:"image/Skin_14_Speedo_RPM_Pointer.png"
+        }
+    }
+
+    ListModel{
+        id:skin_9_pointerOption
+
+        ListElement{
+            source:"image/Skin_9_RPM_Pointer1.png"
+        }
+        ListElement{
+            source:"image/Skin_9_RPM_Pointer2.png"
+        }
+        ListElement{
+            source:"image/Skin_9_RPM_Pointer3.png"
+        }
+        ListElement{
+            source:"image/Skin_9_RPM_Pointer4.png"
+        }
+        ListElement{
+            source:"image/Skin_9_RPM_Pointer5.png"
         }
     }
 

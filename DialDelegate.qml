@@ -27,11 +27,11 @@ Item {
            switch(index){
            case 0:
                   cluster.configurableDial="image/Skin_9_Speedo.png"
-                  cluster.configurableDial_index = 1
+                  cluster.skin_9_configurableDial_index = 1
                   break;
            case 1:
                   cluster.configurableDial="image/Skin_9_Speedo1.png"
-                  cluster.configurableDial_index = 2
+                  cluster.skin_9_configurableDial_index = 2
                   break;
            }
            break;

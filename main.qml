@@ -36,7 +36,9 @@ ApplicationWindow {
         property string configurablePointer:"image/Pointer5.png"
         property string configurableBackground:"" //"image/Skin_4.png"
         property string configurableDial:"image/original Speedo.png"
-        property int configurableDial_index:1
+        property int configurableDial_index:3
+        property int skin_9_configurableDial_index:1
+        property string skin_9_configurablePointer:"image/Skin_9_RPM_Pointer1.png" // _index:1
         property int configurableBackground_index: 9
 
 
@@ -53,7 +55,7 @@ ApplicationWindow {
                            gear = 1
                            bounce_gear_image.start()
                            bounce_display_gear.start()
-                           break
+                           break;
                        case 1:
                            if(rpmValue > 60)
                            {
@@ -278,6 +280,7 @@ ApplicationWindow {
                  opacity: 0.05
                  //visible: true
                  source: "image/low_oil.png"
+                 //transform: Rotation { origin.x: 5; origin.y: 5; axis { x: 0; y: 1; z: 0 } angle: 50 }
                }
 
         Image {
@@ -308,7 +311,7 @@ ApplicationWindow {
                    scale: 0.8
                    opacity:switch(cluster.configurableBackground_index){case 9:0;break;case 12:0;break;default:1}
                    //rotation: 90
-                   source: "https://openclipart.org/image/800px/svg_to_png/209635/food-onion.png"
+                   source:"image/logo.png"
         }
 
         /*Image {
@@ -369,6 +372,7 @@ ApplicationWindow {
                     opacity: 0.05
                     //visible: true
                     source: "image/cabin_lock.png"
+
         }
         Image {
                    id: exhaust
@@ -830,11 +834,11 @@ ApplicationWindow {
                 source: "image/Skin_9_RPM.png"
                 states:[
                     State {
-                        name: "skin_9_change_RPM_dial1"; when: cluster.configurableDial_index == 1
+                        name: "skin_9_change_RPM_dial1"; when: cluster.skin_9_configurableDial_index == 1
                         PropertyChanges { target: skin_9_RPM_dail; source:"image/Skin_9_RPM.png"}
                     },
                    State {
-                        name: "skin_9_change_RPM_dial2"; when: cluster.configurableDial_index == 2
+                        name: "skin_9_change_RPM_dial2"; when: cluster.skin_9_configurableDial_index == 2
                         PropertyChanges { target: skin_9_RPM_dail; source:"image/Skin_9_RPM1.png"}
                     }
                   ]
@@ -856,17 +860,8 @@ ApplicationWindow {
                     z: 2
                     scale:1
                     opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
-                    source: "image/Skin_9_RPM Pointer.png"
-                    states:[
-                        State {
-                            name: "skin_9_change_RPM_pointer1"; when: cluster.configurableDial_index == 1
-                            PropertyChanges { target: skin_9_RPM_pointer; source:"image/Skin_9_RPM Pointer.png"}
-                        },
-                       State {
-                            name: "skin_9_change_RPM_pointer2"; when: cluster.configurableDial_index == 2
-                            PropertyChanges { target: skin_9_RPM_pointer; source:"image/Skin_9_RPM Pointer.png"}
-                        }
-                      ]
+                    source: cluster.skin_9_configurablePointer //"image/Skin_9_RPM Pointer.png"
+
                     transform: Rotation  {
                         id: skin_9_RPM_pointer_Rotation
                         origin.x: 3
@@ -896,11 +891,11 @@ ApplicationWindow {
                 source: "image/Skin_9_Speedo.png"
                 states:[
                     State {
-                        name: "skin_9_change_speed_dial1"; when: cluster.configurableDial_index == 1
+                        name: "skin_9_change_speed_dial1"; when: cluster.skin_9_configurableDial_index == 1
                         PropertyChanges { target: skin_9_Speed_dail; source:"image/Skin_9_Speedo.png"}
                     },
                    State {
-                        name: "skin_9_change_speed_dial2"; when: cluster.configurableDial_index == 2
+                        name: "skin_9_change_speed_dial2"; when: cluster.skin_9_configurableDial_index == 2
                         PropertyChanges { target: skin_9_Speed_dail; source:"image/Skin_9_Speedo1.png"}
                     }
                   ]
@@ -914,6 +909,16 @@ ApplicationWindow {
                    source: "image/Skin_9_Speedo_Blank_Patch.png"
 
                 }
+                Image{
+                    id:skin_9_car
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    z: 5
+                    scale:0.05
+                    opacity: 0 //switch(cluster.configurableBackground_index){case 9:1;break;default:0}
+                    source: "image/car.png"
+
+                 }
 
                 Image {
                     id: skin_9_Speed_pointer
@@ -924,7 +929,7 @@ ApplicationWindow {
                     z: 3
                     scale:1.3
                     opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
-                    source: "image/Skin_9_RPM Pointer.png"
+                    source: cluster.skin_9_configurablePointer //"image/Skin_9_RPM_Pointer1.png"
                     transform: Rotation  {
                         id: skin_9_Speed_pointer_Rotation
                         origin.x: 3
@@ -954,11 +959,11 @@ ApplicationWindow {
                 source: "image/Skin_9_TG & FG.png"
                 states:[
                     State {
-                        name: "skin_9_change_FG_TG_dial1"; when: cluster.configurableDial_index == 1
+                        name: "skin_9_change_FG_TG_dial1"; when: cluster.skin_9_configurableDial_index == 1
                         PropertyChanges { target: skin_9_FG_TG_dail; source:"image/Skin_9_TG & FG.png"}
                     },
                    State {
-                        name: "skin_9_change_FG_TG_dial2"; when: cluster.configurableDial_index == 2
+                        name: "skin_9_change_FG_TG_dial2"; when: cluster.skin_9_configurableDial_index == 2
                         PropertyChanges { target: skin_9_FG_TG_dail; source:"image/Skin_9_FG_TG1.png"}
                     }
                   ]
@@ -981,7 +986,7 @@ ApplicationWindow {
                     z: 2
                     scale:1
                     opacity: switch(cluster.configurableBackground_index){case 9:1;break;default:0}
-                    source: "image/Skin_9_Fuel Pointer.png"
+                    source: cluster.skin_9_configurablePointer //"image/Skin_9_Fuel Pointer.png"
                     transform: Rotation  {
                         id: skin_9_FG_pointer_Rotation
                         origin.x: 3
@@ -1690,9 +1695,10 @@ ApplicationWindow {
             ///NumberAnimation { target:speed_down; property:"x";to:840; duration: 500 }
             ///NumberAnimation { target:speed_down; property:"y";to:250; duration: 500 }
             ///NumberAnimation { target:speed_down; property:"visible";to:0; duration: 100}
-            NumberAnimation { target:display_gear; property:  "opacity"; to: 0; duration: 1500}
-            NumberAnimation { target:gear_image; property:  "opacity"; to: 0; duration: 1500}
-
+            NumberAnimation { target:display_gear; property:  "opacity"; to: 0; duration: 100}
+            NumberAnimation { target:gear_image; property:  "opacity"; to: 0; duration: 100}
+            NumberAnimation{target: skin_9_car; property: "scale"; to: 0.05; duration: 100}
+            NumberAnimation{target: skin_9_car; property: "opacity"; to: 0; duration: 100}
 
 
             //NumberAnimation { target:rpmOverlay; property: "y"; to:switch(cluster.configurableDial_index){case 1:127;break;case 2:157;break;}duration: 500}
@@ -1815,7 +1821,7 @@ ApplicationWindow {
             NumberAnimation{target: engine_check; property: "opacity"; to: 1; duration: 100}
             NumberAnimation{target: immobilizer; property: "opacity"; to: 1; duration: 100}
 
-}
+        }
 
         // decrease all indicators opacity
         SequentialAnimation{
@@ -1871,6 +1877,14 @@ ApplicationWindow {
             NumberAnimation{target: highbeam; property:  "scale"; to: 0.4; duration: 10}
             NumberAnimation{target: highBeam; property: "visible"; to: 0; duration: 100}
 
+
+            NumberAnimation{target: digitalSpeed; property: "opacity"; to: 0; duration: 100}
+            NumberAnimation{target: display_gear; property: "opacity"; to: 0; duration: 100}
+            NumberAnimation{target: gear_image; property: "opacity"; to: 0; duration: 100}
+            NumberAnimation{target: skin_9_car; property: "opacity"; to: 1; duration: 200}
+            NumberAnimation{target: skin_9_car; property: "scale"; to: 0.3; duration: 2000}
+
+
             NumberAnimation{ target:oil; property: "scale"; to: 0; duration: 300}
             NumberAnimation{ target:oil; property: "visible"; to: 1; duration: 100}
             NumberAnimation{ target:low_oil; property: "opacity"; to: 0; duration: 10}
@@ -1908,7 +1922,13 @@ ApplicationWindow {
             NumberAnimation{ target:battery_low; property: "x"; to: 820; duration: 10}
             NumberAnimation{ target:battery_low; property: "y"; to: 60; duration: 10}
             NumberAnimation{target: battery_low; property:  "scale"; to: 0.4; duration: 10}
-            NumberAnimation{ target:battery; property: "visible"; to: 0; duration: 100}
+            NumberAnimation{ target:battery; property: "visible"; to: 0; duration: 100}            
+
+            NumberAnimation{target: skin_9_car; property: "scale"; to: 0.05; duration: 2000}
+            NumberAnimation{target: skin_9_car; property: "opacity"; to: 0; duration: 200}
+            NumberAnimation{target: digitalSpeed; property: "opacity"; to: 1; duration: 100}
+            NumberAnimation{target: display_gear; property: "opacity"; to: 1; duration: 100}
+            NumberAnimation{target: gear_image; property: "opacity"; to: 1; duration: 100}
 
             NumberAnimation{ target:fuelLeak; property: "scale"; to: 0; duration: 300}
             NumberAnimation{ target:fuelLeak; property: "visible"; to: 1; duration: 100}
@@ -1928,6 +1948,7 @@ ApplicationWindow {
             NumberAnimation{ target:petrol_indicator; property: "y"; to: 38; duration: 10}
             NumberAnimation{target: petrol_indicator; property:  "scale"; to: 0.3; duration: 10}
             NumberAnimation{ target:fuelLeak; property: "visible"; to: 0; duration: 100}
+
 
             NumberAnimation{ target:parkinglight; property: "scale"; to: 0; duration: 300}
             NumberAnimation{ target:parkinglight; property: "visible"; to: 1; duration: 100}

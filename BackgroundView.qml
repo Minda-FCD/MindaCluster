@@ -45,7 +45,7 @@ FocusScope {
             Heightt:480
         }
         ListElement{
-            sourcee:"image/Skin_4.png" //
+            sourcee:"image/Skin_4.png"
             scalee: 0.22
             widthh:1082
             Heightt:480
@@ -63,80 +63,7 @@ FocusScope {
             Heightt:480
         }
         ListElement{
-            sourcee:"image/Skin_8.png"
-            scalee: 0.22
-            widthh:1082
-            Heightt:480
-        }
-        ListElement{
-            sourcee:"image/Skin_5.png" //Skin_9
-            scalee:0.22
-            widthh:1082
-            Heightt:480
-        }
-        ListElement{
-            sourcee:"image/Skin_10.png"
-            scalee:0.22
-            widthh:1082
-            Heightt:480
-        }
-        ListElement{
             sourcee:"image/Skin_11.png"
-            scalee:0.22
-            widthh:1082
-            Heightt:480
-        }
-        ListElement{
-            sourcee:"" //"image/Skin_2.png"
-            scalee:0.22
-            widthh:1082
-            Heightt:480
-        }
-        ListElement{
-            sourcee:"image/Skin_3.png"
-            scalee:0.22
-            widthh:1082
-            Heightt:480
-        }
-        ListElement{
-            sourcee:"image/mountain_view.jpg"
-            scalee:1
-            widthh:284
-            Heightt:177
-        }
-
-        ListElement{
-            sourcee:"image/Red.jpg"
-            scalee:1
-            widthh:284
-            Heightt:177
-        }
-        ListElement{
-            sourcee:"image/grass.jpg"
-            scalee:1
-            widthh:284
-            Heightt:177
-        }
-        ListElement{
-            sourcee:"image/brown.jpg"
-            scalee:1
-            widthh:284
-            Heightt:177
-        }
-        ListElement{
-            sourcee:"image/hay.jpg"
-            scalee:1
-            widthh:284
-            Heightt:177
-        }
-        ListElement{
-            sourcee:"image/skyblue.jpg"
-            scalee:1
-            widthh:284
-            Heightt:177
-        }
-        ListElement{
-            sourcee:"image/Skin_4.png"
             scalee:0.22
             widthh:1082
             Heightt:480
